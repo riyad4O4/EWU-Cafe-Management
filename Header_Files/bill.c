@@ -3,7 +3,7 @@
 
 int place_order()
 {
-    // Implementation for placing an order
+    
 }
 
 int select_food()
