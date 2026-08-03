@@ -9,9 +9,13 @@ int card_payment()
 {
 
 }
-int discount()
+int discount(int total_price)
 {
-
+    if (total_price>1000)
+    {
+        total_price=total_price-(total_price*0.05);
+    }
+    
 }
 int monthly_sales()
 {
