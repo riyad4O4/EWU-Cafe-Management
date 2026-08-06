@@ -1,8 +1,8 @@
-#include<stdio.h>
+#include <stdio.h>
 #include "main_menu.h"
-int main() 
-{   
-    
+int main()
+{
+
     int choice;
     printf("Main Menu:\n");
     printf("1. Faculty\n");
@@ -12,26 +12,35 @@ int main()
     printf("Enter your choice: ");
     scanf("%d", &choice);
 
-    if(choice == 1) 
+    if (choice == 1)
     {
-        account();
-    } 
-    else if(choice == 2) 
+        printf("1.Register/n");
+        printf("2.Log in");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        if (choice==1)
+        {
+            //create_account();
+        }
+        else if (choice==2)
+        {
+            //log_in();
+        }
+        
+    }
+    else if (choice == 2)
     {
-        account();
-    } 
-    else if(choice == 3) 
+    }
+    else if (choice == 3)
     {
-        account();
-    } 
-    else if(choice == 4) 
+    }
+    else if (choice == 4)
     {
-        account();
-    } 
-    else 
+    }
+    else
     {
         printf("Invalid choice. Please try again.\n");
     }
-    
+
     return main();
 }

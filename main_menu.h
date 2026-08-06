@@ -1,5 +1,5 @@
-#ifndef menu_h  
-#define menu_h 
+#ifndef MAIN_MENU_h  
+#define MAIN_MENU_h 
 
 int menu();
 
