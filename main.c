@@ -18,24 +18,49 @@ int main()
         printf("2.Log in");
         printf("Enter your choice: ");
         scanf("%d", &choice);
-        if (choice==1)
+        if (choice == 1)
         {
-            //create_account();
+            // create_account();
         }
-        else if (choice==2)
+        else if (choice == 2)
         {
-            //log_in();
+            // log_in();
         }
-        
     }
     else if (choice == 2)
     {
+        printf("1.Register/n");
+        printf("2.Log in");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        if (choice == 1)
+        {
+            // create_account();
+        }
+        else if (choice == 2)
+        {
+            // log_in();
+        }
     }
     else if (choice == 3)
     {
+        printf("1.Register/n");
+        printf("2.Log in");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        if (choice == 1)
+        {
+            // create_account();
+        }
+        else if (choice == 2)
+        {
+            // log_in();
+        }
     }
     else if (choice == 4)
     {
+        printf("Exiting the program.\n");
+        return 0;
     }
     else
     {
