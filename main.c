@@ -14,7 +14,7 @@ int main()
 
     if (choice == 1)
     {
-        printf("1.Register/n");
+        printf("1.Register\n");
         printf("2.Log in");
         printf("Enter your choice: ");
         scanf("%d", &choice);
@@ -25,6 +25,16 @@ int main()
         else if (choice == 2)
         {
             // log_in();
+            printf("1. View Menu");
+            printf("2. Search food");
+            printf("3. View profile");
+            printf("Enter your choice: ");
+            scanf("%d", &choice);
+            if (choice==1)
+            {
+                view_FoodList();
+            }
+            
         }
     }
     else if (choice == 2)
