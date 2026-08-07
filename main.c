@@ -20,51 +20,58 @@ int main()
         scanf("%d", &choice);
         if (choice == 1)
         {
-            // create_account();
+            create_account();
         }
         else if (choice == 2)
         {
-            // log_in();
+            log_in();
             printf("1. View Menu");
             printf("2. Search food");
             printf("3. View profile");
             printf("Enter your choice: ");
             scanf("%d", &choice);
-            if (choice==1)
+            if (choice == 1)
             {
                 view_FoodList();
             }
-            
+            else if (choice == 2)
+            {
+                search_food();
+            }
+            else if (choice == 3)
+            {
+                view_profile();
+            }
         }
     }
     else if (choice == 2)
     {
-        printf("1.Register/n");
+        printf("1.Register\n");
         printf("2.Log in");
         printf("Enter your choice: ");
         scanf("%d", &choice);
         if (choice == 1)
         {
-            // create_account();
+            create_account();
         }
         else if (choice == 2)
         {
-            // log_in();
+            log_in();
         }
     }
     else if (choice == 3)
     {
-        printf("1.Register/n");
+        printf("1.Register\n");
         printf("2.Log in");
         printf("Enter your choice: ");
         scanf("%d", &choice);
         if (choice == 1)
         {
-            // create_account();
+            create_account();
         }
         else if (choice == 2)
         {
-            // log_in();
+            log_in();
         }
     }
     else if (choice == 4)
