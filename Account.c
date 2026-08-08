@@ -10,8 +10,6 @@ struct Account
     char password[15];
 };
 
-int valid_password(char password[]);
-
 int sign_up()
 {
     create_account();
