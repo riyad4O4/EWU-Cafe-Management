@@ -12,12 +12,12 @@ struct Account
 
 int valid_password(char password[]);
 
-void sign_up()
+int sign_up()
 {
     create_account();
 }
 
-void create_account()
+int create_account()
 {
 struct Account user;
 struct Account temp;
@@ -117,7 +117,7 @@ int valid_password(char password[])
     return 0;
 }
 
-void log_in()
+int log_in()
 {
 struct Account user;
 
@@ -170,7 +170,7 @@ struct Account user;
     }
 }
 
-void change_password()
+int change_password()
 {
     struct Account user;
 
@@ -274,12 +274,12 @@ while(fscanf(fp, "%s %s %s %s \n",
     }
 }
 
-void log_out()
+int log_out()
 {
 printf("\n Logged out successfully! \n");
 }
 
-void admin_login()
+int admin_login()
 {
     char password[15];
     printf("\n ADMIN LOGIN \n");
