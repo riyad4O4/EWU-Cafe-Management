@@ -297,17 +297,4 @@ int admin_login()  //Funtion for admin login
     {
         printf("\n Wrong Password! \n");
     }
-    printf("\n ADMIN LOGIN \n");
-
-    printf("Password: ");
-    scanf("%s", password);
-
-    if(strcmp(password, "1234") == 0)
-    {
-        printf("\n Admin Login Successful! \n");
-    }
-    else
-    {
-        printf("\n Wrong Password! \n");
-    }
 }
