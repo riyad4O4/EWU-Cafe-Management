@@ -8,4 +8,3 @@ int monthly_sales();
 int daily_sales();
 
 #endif
-//comment
