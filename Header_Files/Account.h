@@ -1,7 +1,6 @@
 #ifndef ACCOUNT_H
 #define ACCOUNT_H
 
-int sign_up();
 int create_account();
 int valid_password(char password[]);
 int log_in();
