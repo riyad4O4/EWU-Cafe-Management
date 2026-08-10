@@ -8,6 +8,7 @@ struct Account
     char email[40];
     char phone[15];  
     char password[15];
+    char type[10];
 };
 
 int create_account()
@@ -22,6 +23,7 @@ if(fp==NULL)  //Check if the files could not be opened
     return 0;
 }
 printf("\n----CREATE ACCOUNT----\n");
+printf("Enter Student ID/Faculty ID");
 //Take input
 scanf("%s", user.id);
 rewind(fp); //Check if ID already registered
@@ -29,10 +31,33 @@ while(fscanf(fp, "%s %s %s %s", temp.id, temp.email, temp.phone, temp.password)!
 {
     if(strcmp(user.id, temp.id)== 0)  //Compare entered ID with registered ones
     {
-        printf("This Student ID already exists!\n");
+        printf("This ID already exists!\n");
             fclose(fp);  //Close the file
             return 0;
     }
+}
+
+printf("\n 1. Student\n");
+printf("2. Faculty\n");
+
+int choice;
+
+printf("Enter Account Type: ");
+scanf("%d", &choice);
+
+if(choice == 1)
+{
+    strcpy(user.type, "student");
+}
+else if(choice == 2)
+{
+    strcpy(user.type, "faculty");
+}
+else
+{
+    printf("Account Type Invalid! Please Try Again!");
+    fclose(fp);
+    return 0;
 }
     printf("Enter Email: ");
     scanf("%s", user.email);
