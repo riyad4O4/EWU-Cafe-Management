@@ -10,13 +10,6 @@ struct Account
     char password[15];
 };
 
-//Function for signing up
-int sign_up()
-{
-    create_account();
-}
-
-//Function to create a new account
 int create_account()
 {
 struct Account user;  //Stores new user's information
@@ -26,6 +19,7 @@ fp=fopen("accounts.txt", "a+");  //Open accounts.txt in append and reads
 if(fp==NULL)  //Check if the files could not be opened
 {
     printf("File Error!\n");
+    return 0;
 }
 printf("\n----CREATE ACCOUNT----\n");
 //Take input
@@ -37,6 +31,7 @@ while(fscanf(fp, "%s %s %s %s", temp.id, temp.email, temp.phone, temp.password)!
     {
         printf("This Student ID already exists!\n");
             fclose(fp);  //Close the file
+            return 0;
     }
 }
     printf("Enter Email: ");
@@ -75,6 +70,7 @@ int valid;  //Asking for a valid password
     fclose(fp);  //Close the file
 
     printf("\n Account Created Successfully! \n");
+    return 1;
 }
 int valid_password(char password[]) //Function to check the validity of password
 {
@@ -163,10 +159,12 @@ struct Account user;
     if(found == 1)  //Display login result
     {
         printf("\nLogin Successful!\n");
+        return 1;
     }
     else
     {
         printf("\nWrong Student ID or Password!\n");
+        return 0;
     }
 }
 //Function to change user's password
@@ -189,7 +187,7 @@ int change_password()
     if(fp == NULL)  //Checks if the file not exists
     {
         printf("No Account Found!\n");
-        return;
+        return 0;
     }
 
     temp = fopen("temp.txt", "w");  //Create a temporary file
@@ -198,7 +196,7 @@ int change_password()
     {
         printf("File Error!\n");
         fclose(fp);
-        return;
+        return 0;
 }
 printf("\n CHANGE PASSWORD: \n");
 
@@ -269,16 +267,19 @@ while(fscanf(fp, "%s %s %s %s \n",
     if(found == 1)  //Display the result
     {
         printf("\nPassword Changed Successfully!\n");
+        return 1;
     }
     else
     {
         printf("\nWrong Student ID or Password!\n");
+        return 0;
     }
 }
 
 int log_out()  //Function to log out
 {
 printf("\n Logged out successfully! \n");
+return 1;
 }
 
 int admin_login()  //Funtion for admin login
@@ -292,9 +293,11 @@ int admin_login()  //Funtion for admin login
     if(strcmp(password, "1234") == 0)  //Checks if the given password is correct
     {
         printf("\n Admin Login Successful! \n");
+        return 1;
     }
     else
     {
         printf("\n Wrong Password! \n");
+        return 0;
     }
 }
