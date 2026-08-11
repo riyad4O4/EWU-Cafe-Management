@@ -55,5 +55,46 @@ int load_foods()
 
 
 
+ 
+
+
+/*--------------------------------------------------
+    Display Available Foods
+    Return:
+    1 = Successfully displayed
+    0 = No food available
+--------------------------------------------------*/
+int display_foods()
+{
+    int i;
+
+    if(foodCount == 0)
+    {
+        printf("\nNo food available.\n");
+        return 0;
+    }
+
+    printf("\n=============================================\n");
+    printf("            UNIVERSITY CAFE MENU\n");
+    printf("=============================================\n");
+
+    printf("%-5s %-20s %-10s %-10s\n",
+           "ID", "Food", "Price", "Stock");
+
+    printf("=============================================\n");
+
+    for(i = 0; i < foodCount; i++)
+    {
+        printf("%-5d %-20s %-10.2lf %-10d\n",
+               foods[i].id,
+               foods[i].name,
+               foods[i].price,
+               foods[i].stock);
+    }
+
+    printf("=============================================\n");
+
+    return 1;
+}
 
 
