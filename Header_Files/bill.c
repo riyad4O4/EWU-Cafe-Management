@@ -14,3 +14,46 @@ CartItem cart[MAX_CART];
 int cartCount = 0;
 
 
+
+
+/*--------------------------------------------------
+    Load foods from foods.txt
+    Return:
+    1 = Successfully loaded
+    0 = Failed to load
+--------------------------------------------------*/
+int load_foods()
+{
+    FILE *fp;
+
+    fp = fopen("foods.txt", "r");
+
+    if(fp == NULL)
+    {
+        printf("\nUnable to open foods.txt\n");
+        return 0;
+    }
+
+    foodCount = 0;
+
+    while(fscanf(fp, "%d %s %lf %d",
+                 &foods[foodCount].id,
+                 foods[foodCount].name,
+                 &foods[foodCount].price,
+                 &foods[foodCount].stock) == 4)
+    {
+        foodCount++;
+
+        if(foodCount >= MAX_FOODS)
+            break;
+    }
+
+    fclose(fp);
+
+    return 1;
+}
+
+
+
+
+
