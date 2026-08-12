@@ -5,16 +5,13 @@
 
 #include "bill.h"
 
-/* Global Arrays */
+    /* Global Arrays */
 
-Food foods[MAX_FOODS];
+    Food foods[MAX_FOODS];
 int foodCount = 0;
 
 CartItem cart[MAX_CART];
 int cartCount = 0;
-
-
-
 
 /*--------------------------------------------------
     Load foods from foods.txt
@@ -28,7 +25,7 @@ int load_foods()
 
     fp = fopen("foods.txt", "r");
 
-    if(fp == NULL)
+    if (fp == NULL)
     {
         printf("\nUnable to open foods.txt\n");
         return 0;
@@ -36,15 +33,15 @@ int load_foods()
 
     foodCount = 0;
 
-    while(fscanf(fp, "%d %s %lf %d",
-                 &foods[foodCount].id,
-                 foods[foodCount].name,
-                 &foods[foodCount].price,
-                 &foods[foodCount].stock) == 4)
+    while (fscanf(fp, "%d %s %lf %d",
+                  &foods[foodCount].id,
+                  foods[foodCount].name,
+                  &foods[foodCount].price,
+                  &foods[foodCount].stock) == 4)
     {
         foodCount++;
 
-        if(foodCount >= MAX_FOODS)
+        if (foodCount >= MAX_FOODS)
             break;
     }
 
@@ -52,11 +49,6 @@ int load_foods()
 
     return 1;
 }
-
-
-
- 
-
 
 /*--------------------------------------------------
     Display Available Foods
@@ -68,7 +60,7 @@ int display_foods()
 {
     int i;
 
-    if(foodCount == 0)
+    if (foodCount == 0)
     {
         printf("\nNo food available.\n");
         return 0;
@@ -83,7 +75,7 @@ int display_foods()
 
     printf("=============================================\n");
 
-    for(i = 0; i < foodCount; i++)
+    for (i = 0; i < foodCount; i++)
     {
         printf("%-5d %-20s %-10.2lf %-10d\n",
                foods[i].id,
@@ -97,4 +89,15 @@ int display_foods()
     return 1;
 }
 
-
+int print_receipt(total_bill, selected_id)
+{
+    int id;
+    char name[30];
+    float price;
+    FILE *file;
+    file = fopen("foods.txt", "a");
+    while (file = !EOF)
+    {
+        fscanf(file, "%d %s %f", &id, &name, &price);
+    }
+}
