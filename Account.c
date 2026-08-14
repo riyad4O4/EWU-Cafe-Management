@@ -1,5 +1,4 @@
 #include<stdio.h>
-#include<stdint.h>
 #include<string.h>
 #include "Account.h"
 
@@ -25,8 +24,8 @@ if(fp==NULL)  //Check if the files could not be opened
 }
 printf("\n----CREATE ACCOUNT----\n");
 printf("Enter Student ID/Faculty ID");
+getchar();
 //Take input
-getchar;
 fgets(user.id, sizeof(user.id), stdin);
 rewind(fp); //Check if ID already registered
 while(fscanf(fp, "%s %s %s %s %s", temp.id, temp.email, temp.phone, temp.password, temp.type)!= EOF) //Read registered accounts from the file
@@ -45,8 +44,7 @@ printf("2. Faculty\n");
 int choice;
 
 printf("Enter Account Type: ");
-getchar;
-fgets(choice, sizeof(choice), stdin);
+scanf("%d", &choice);
 
 if(choice == 1)
 {
@@ -62,9 +60,8 @@ else
     fclose(fp);
     return 0;
 }
-
-getchar;
     printf("Enter Email: ");
+    getchar();
     fgets(user.email, sizeof(user.email), stdin);
 
     printf("Enter Phone Number: ");
@@ -91,11 +88,12 @@ int valid;  //Asking for a valid password
 
     } while(valid == 0);
 
-    fprintf(fp, "%s %s %s %s \n",
+    fprintf(fp, "%s %s %s %s %s\n",
             user.id,
             user.email,
             user.phone,
-            user.password);  //Save new account's information into the file
+            user.password,
+            user.type);  //Save new account's information into the file
 
     fclose(fp);  //Close the file
 
@@ -159,7 +157,7 @@ struct Account user;
     if(fp == NULL)  //Checks if the file exists
     {
         printf("No Account Found!\n");
-        return 0;;
+        return 0;
     }
 
     printf("\n~~~~~ LOGIN ~~~~~\n");
@@ -322,6 +320,7 @@ int admin_login()  //Funtion for admin login
     printf("\n ADMIN LOGIN \n");
 
     printf("Password: ");
+    getchar();
     fgets(password, sizeof(password), stdin);
     
     if(strcmp(password, "1234") == 0)  //Checks if the given password is correct
