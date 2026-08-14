@@ -141,7 +141,7 @@ int add_to_cart()
         printf("Cart is full.\n");
         return 0;
     }
-    
+
     cart[cartCount].foodId = foods[position].id;
 
     strcpy(cart[cartCount].foodName,
@@ -159,4 +159,18 @@ int add_to_cart()
     printf("Food added to cart.\n");
 
     return 1;
+}/* Calculate total */
+
+double calculate_total()
+{
+    int i;
+    double total = 0;
+
+    for(i = 0; i < cartCount; i++)
+    {
+        total = total + cart[i].subtotal;
+    }
+
+    return total;
 }
+
