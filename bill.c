@@ -102,5 +102,42 @@ int find_food_by_id(int id)
 
     return -1;
 }
+/* Add food to cart */
 
+int add_to_cart()
+{
+    int id;
+    int quantity;
+    int position;
+
+    printf("\nEnter Food ID: ");
+    scanf("%d", &id);
+
+    position = find_food_by_id(id);
+
+    if(position == -1)
+    {
+        printf("Food not found.\n");
+        return 0;
+    }
+
+    printf("Enter quantity: ");
+    scanf("%d", &quantity);
+
+    if(quantity <= 0)
+    {
+        printf("Invalid quantity.\n");
+        return 0;
+    }
+
+    if(quantity > foods[position].stock)
+    {
+        printf("Not enough stock.\n");
+        return 0;
+    }
+
+    if(cartCount >= MAX_CART)
+    {
+        printf("Cart is full.\n");
+        return 0;
 
