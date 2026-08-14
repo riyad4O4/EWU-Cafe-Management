@@ -85,35 +85,21 @@ int display_foods()
     printf("=============================================\n");
     return 1;
 }
-//till here
-    printf("%-5s %-20s %-10s %-10s\n",
-           "ID", "Food", "Price", "Stock");
 
-    printf("=============================================\n");
+/* Find food by ID */
 
-    for (i = 0; i < foodCount; i++)
-    {
-        printf("%-5d %-20s %-10.2lf %-10d\n",
-               foods[i].id,
-               foods[i].name,
-               foods[i].price,
-               foods[i].stock);
-    }
-
-    printf("=============================================\n");
-
-    return 1;
-}
-
-int print_receipt(total_bill, selected_id)
+int find_food_by_id(int id)
 {
-    int id;
-    char name[30];
-    float price;
-    FILE *file;
-    file = fopen("foods.txt", "a");
-    while (file = !EOF)
+    int i;
+
+    for(i = 0; i < foodCount; i++)
     {
-        fscanf(file, "%d %s %f", &id, &name, &price);
+        if(foods[i].id == id)
+        {
+            return i;
+        }
     }
+
+    return -1;
 }
+
