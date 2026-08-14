@@ -27,7 +27,7 @@ printf("Enter Student ID/Faculty ID");
 //Take input
 scanf("%s", user.id);
 rewind(fp); //Check if ID already registered
-while(fscanf(fp, "%s %s %s %s", temp.id, temp.email, temp.phone, temp.password)!= EOF) //Read registered accounts from the file
+while(fscanf(fp, "%s %s %s %s %s", temp.id, temp.email, temp.phone, temp.password, temp.type)!= EOF) //Read registered accounts from the file
 {
     if(strcmp(user.id, temp.id)== 0)  //Compare entered ID with registered ones
     {
@@ -154,7 +154,7 @@ struct Account user;
     if(fp == NULL)  //Checks if the file exists
     {
         printf("No Account Found!\n");
-        return;
+        return 0;;
     }
 
     printf("\n~~~~~ LOGIN ~~~~~\n");
