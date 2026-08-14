@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<stdint.h>
 #include<string.h>
 #include "Account.h"
 
@@ -25,7 +26,8 @@ if(fp==NULL)  //Check if the files could not be opened
 printf("\n----CREATE ACCOUNT----\n");
 printf("Enter Student ID/Faculty ID");
 //Take input
-scanf("%s", user.id);
+getchar;
+fgets(user.id, sizeof(user.id), stdin);
 rewind(fp); //Check if ID already registered
 while(fscanf(fp, "%s %s %s %s %s", temp.id, temp.email, temp.phone, temp.password, temp.type)!= EOF) //Read registered accounts from the file
 {
@@ -43,7 +45,8 @@ printf("2. Faculty\n");
 int choice;
 
 printf("Enter Account Type: ");
-scanf("%d", &choice);
+getchar;
+fgets(choice, sizeof(choice), stdin);
 
 if(choice == 1)
 {
@@ -59,11 +62,13 @@ else
     fclose(fp);
     return 0;
 }
+
+getchar;
     printf("Enter Email: ");
-    scanf("%s", user.email);
+    fgets(user.email, sizeof(user.email), stdin);
 
     printf("Enter Phone Number: ");
-    scanf("%s", user.phone);
+    fgets(user.phone, sizeof(user.phone), stdin);
 
 int valid;  //Asking for a valid password
 
@@ -160,16 +165,17 @@ struct Account user;
     printf("\n~~~~~ LOGIN ~~~~~\n");
 
     printf("Student ID: ");
-    scanf("%s", id);
+    fgets(id, sizeof(id), stdin);
 
     printf("Password: ");
-    scanf("%s", password);
+    fgets(password, sizeof(password), stdin);
 
-    while(fscanf(fp, "%s %s %s %s \n",
+    while(fscanf(fp, "%s %s %s %s %s\n",
                  user.id,
                  user.email,
                  user.phone,
-                 user.password) != EOF) //Reads each and every from the accounts file
+                 user.password,
+                 user.type) != EOF) //Reads each and every from the accounts file
     {
         if(strcmp(id, user.id) == 0 &&
            strcmp(password, user.password) == 0)  //Compares entered ID and password with stored infos
@@ -226,16 +232,16 @@ int change_password()
 printf("\n CHANGE PASSWORD: \n");
 
     printf("Student ID: ");
-    scanf("%s", id);
+    fgets(id, sizeof(id), stdin);
 
     printf("Old Password: ");
-    scanf("%s", oldpass);
+    fgets(oldpass, sizeof(oldpass), stdin);
 
 //Keep asking for a new password until it is valid
     do
     {
         printf("New Password: ");
-        scanf("%s", newpass);
+        fgets(newpass, sizeof(newpass), stdin);
 
         if(strcmp(oldpass, newpass) == 0) //New password and old password cannot be same
         {
@@ -255,30 +261,33 @@ printf("\n CHANGE PASSWORD: \n");
 
     } 
     while(valid == 0);
-while(fscanf(fp, "%s %s %s %s \n",
+while(fscanf(fp, "%s %s %s %s %s\n",
                  user.id,
                  user.email,
                  user.phone,
-                 user.password) != EOF)  //Reads all account from the original file
+                 user.password,
+                 user.type) != EOF)  //Reads all account from the original file
     {
         if(strcmp(id, user.id) == 0 &&
            strcmp(oldpass, user.password) == 0)  //Checks whether it's the same account who's password should be changed
         {
-            fprintf(temp, "%s %s %s %s\n",
+            fprintf(temp, "%s %s %s %s %s\n",
                     user.id,
                     user.email,
                     user.phone,
-                    newpass);  //Register the account with new password
+                    newpass,
+                    user.type);  //Register the account with new password
 
             found = 1;
         }
         else
         {
-            fprintf(temp, "%s %s %s %s\n",
+            fprintf(temp, "%s %s %s %s %s\n",
                     user.id,
                     user.email,
                     user.phone,
-                    user.password);  //Copy other accounts without changing them
+                    user.password,
+                    user.type);  //Copy other accounts without changing them
         }
     }
 
@@ -313,8 +322,8 @@ int admin_login()  //Funtion for admin login
     printf("\n ADMIN LOGIN \n");
 
     printf("Password: ");
-    scanf("%s", password);
-
+    fgets(password, sizeof(password), stdin);
+    
     if(strcmp(password, "1234") == 0)  //Checks if the given password is correct
     {
         printf("\n Admin Login Successful! \n");
