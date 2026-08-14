@@ -142,4 +142,21 @@ int add_to_cart()
         return 0;
     }
     
+    cart[cartCount].foodId = foods[position].id;
 
+    strcpy(cart[cartCount].foodName,
+           foods[position].name);
+
+    cart[cartCount].price = foods[position].price;
+
+    cart[cartCount].quantity = quantity;
+
+    cart[cartCount].subtotal =
+        foods[position].price * quantity;
+
+    cartCount++;
+
+    printf("Food added to cart.\n");
+
+    return 1;
+}
