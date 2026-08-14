@@ -58,12 +58,12 @@ int load_foods()
  
 
 
-/*--------------------------------------------------
+/*
     Display Available Foods
     Return:
     1 = Successfully displayed
-    0 = No food available
---------------------------------------------------*/
+    0 = No food available*/
+
 int display_foods()
 {
     int i;
