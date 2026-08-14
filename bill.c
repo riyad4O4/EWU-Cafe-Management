@@ -20,7 +20,8 @@ int cartCount = 0;
     0 = Failed to load
 --------------------------------------------------*/
 int load_foods()
-{
+{  
+    //file *fp used for file handiling
     FILE *fp;
 
     fp = fopen("foods.txt", "r");
@@ -32,7 +33,7 @@ int load_foods()
     }
 
     foodCount = 0;
-
+// fscanf used to read data from file
     while (fscanf(fp, "%d %s %lf %d",
                   &foods[foodCount].id,
                   foods[foodCount].name,
@@ -42,10 +43,13 @@ int load_foods()
         foodCount++;
 
         if (foodCount >= MAX_FOODS)
+        {
             break;
+        }
     }
 
     fclose(fp);
+     //fclose used to close the file after reading
 
     return 1;
 }
@@ -62,14 +66,26 @@ int display_foods()
 
     if (foodCount == 0)
     {
-        printf("\nNo food available.\n");
+        printf("No food available.\n");
         return 0;
     }
 
     printf("\n=============================================\n");
     printf("            UNIVERSITY CAFE MENU\n");
     printf("=============================================\n");
-
+    printf("ID\tfood\t\tPrice\tStock\n");
+    for (i = 0; i < foodCount; i++)
+    {
+        printf("%d\t%s\t\t%.2lf\t%d\n",
+               foods[i].id,
+               foods[i].name,
+               foods[i].price,
+               foods[i].stock);
+    }
+    printf("=============================================\n");
+    return 1;
+}
+//till here
     printf("%-5s %-20s %-10s %-10s\n",
            "ID", "Food", "Price", "Stock");
 
