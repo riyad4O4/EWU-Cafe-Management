@@ -160,3 +160,63 @@ void addFood()
 
     printf("\nFood added successfully!\n");
 }
+/* 2. EDIT FOOD */
+void editFood()
+{
+    int id;
+
+    printf("\n========== EDIT FOOD ==========\n");
+
+    printf("Enter Food ID to edit: ");
+    scanf("%d", &id);
+
+    int index = findFoodIndex(id);
+
+    if (index == -1)
+    {
+        printf("\n[Error] Food with ID %d not found.\n", id);
+        return;
+    }
+
+    printf("\nCurrent Name: %s\n", foods[index].name);
+    printf("Current Price: %.2f\n", foods[index].price);
+
+    printf("\nEnter New Name: ");
+    scanf(" %[^\n]", foods[index].name);
+
+    printf("Enter New Price: ");
+    scanf("%f", &foods[index].price);
+
+    saveToFile();
+
+    printf("\nFood updated successfully!\n");
+}
+/* 3. DELETE FOOD */
+void deleteFood()
+{
+    int id;
+
+    printf("\n========== DELETE FOOD ==========\n");
+
+    printf("Enter Food ID to delete: ");
+    scanf("%d", &id);
+
+    int index = findFoodIndex(id);
+
+    if (index == -1)
+    {
+        printf("\n[Error] Food with ID %d not found.\n", id);
+        return;
+    }
+
+    for (int i = index; i < foodCount - 1; i++)
+    {
+        foods[i] = foods[i + 1];
+    }
+
+    foodCount--;
+
+    saveToFile();
+
+    printf("\nFood item deleted successfully!\n");
+}
