@@ -33,7 +33,8 @@ int load_foods()
 
 
     /*EAMPLE :
-    *format of foods.txt:
+    
+    format of foods.txt:
     1 chiken fry 120.00 10
     here the first word is ID.
     the last two values are price and stock.
