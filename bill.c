@@ -194,3 +194,31 @@ int display_foods()
         printf("\nNo food available.\n");
         return 0;
     }
+// fixed bug and edited from here .
+
+    printf("\n=============================================\n");
+    printf("          UNIVERSITY CAFE MENU\n");
+    printf("=============================================\n");
+
+    printf("%-5s %-25s %-10s %-10s\n",
+           "ID",
+           "Food",
+           "Price",
+           "Stock");
+
+    printf("=============================================\n");
+
+    for(i = 0; i < foodCount; i++)
+    {
+        printf("%-5d %-25s %-10.2lf %-10d\n",
+               foods[i].id,
+               foods[i].name,
+               foods[i].price,
+               foods[i].stock);
+    }
+
+    printf("=============================================\n");
+
+    return 1;
+}
+
