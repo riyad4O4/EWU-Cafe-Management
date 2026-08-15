@@ -38,13 +38,7 @@ int load_foods()
     the last two values are price and stock.
     the name is between id and price.*/
 
-
-
-    fclose(fp);
-     //fclose used to close the file after reading
-
-    return 1;
-}*/
+}
 while(fgets(line, sizeof(line), fp) != NULL)
     {
         char name[50];
@@ -152,11 +146,11 @@ while(fgets(line, sizeof(line), fp) != NULL)
 
 
 
-*/
+
 // fixed bug and edited from here .
-/*--------------------------------------------------
+/*
     Display Available Foods
---------------------------------------------------*/
+*/
 
 int display_foods()
 {
@@ -391,6 +385,24 @@ printf("Enter Quantity: ");
     return 1;
 }
 
+/*
+    Calculate Total
+*/
+
+double calculate_total()
+{
+    int i;
+    double total;
+
+    total = 0;
+
+    for(i = 0; i < cartCount; i++)
+    {
+        total = total + cart[i].subtotal;
+    }
+
+    return total;
+}
 
 
 
