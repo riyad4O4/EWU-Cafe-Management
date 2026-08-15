@@ -1,11 +1,11 @@
 
-#include <stdio.h>           //student ID: 2026-2-60-024
+#include <stdio.h>                          //student ID: 2026-2-60-024
 #include <stdlib.h>
 #include <string.h>
 
 #include "bill.h"
 
-    /* Global variables */
+    // Global variables 
 
     Food foods[MAX_FOODS];
 int foodCount = 0;
@@ -49,7 +49,7 @@ while(fgets(line, sizeof(line), fp) != NULL)
         int i;
         int result;
 
-        result = sscanf(line, "%d %[^\n] %lf %d",
+        result = sscanf(line, "%d %C %lf %d",
                         &id,
                         name,
                         &price,
