@@ -181,107 +181,16 @@ int display_foods()
     }
 */
 // fixed bug and edited from here .
-    printf("\n=============================================\n");
-    printf("            UNIVERSITY CAFE MENU\n");
-    printf("=============================================\n");
-    printf("ID\tfood\t\tPrice\tStock\n");
-    for (i = 0; i < foodCount; i++)
-    {
-        printf("%d\t%s\t\t%.2lf\t%d\n",
-               foods[i].id,
-               foods[i].name,
-               foods[i].price,
-               foods[i].stock);
-    }
-    printf("=============================================\n");
-    return 1;
-}
+/*--------------------------------------------------
+    Display Available Foods
+--------------------------------------------------*/
 
-/* Find food by ID */
-
-int find_food_by_id(int id)
+int display_foods()
 {
     int i;
 
-    for(i = 0; i < foodCount; i++)
+    if(foodCount == 0)
     {
-        if(foods[i].id == id)
-        {
-            return i;
-        }
-    }
-
-    return -1;
-}
-/* Add food to cart */
-
-int add_to_cart()
-{
-    int id;
-    int quantity;
-    int position;
-
-    printf("\nEnter Food ID: ");
-    scanf("%d", &id);
-
-    position = find_food_by_id(id);
-
-    if(position == -1)
-    {
-        printf("Food not found.\n");
+        printf("\nNo food available.\n");
         return 0;
     }
-
-    printf("Enter quantity: ");
-    scanf("%d", &quantity);
-
-    if(quantity <= 0)
-    {
-        printf("Invalid quantity.\n");
-        return 0;
-    }
-
-    if(quantity > foods[position].stock)
-    {
-        printf("Not enough stock.\n");
-        return 0;
-    }
-
-    if(cartCount >= MAX_CART)
-    {
-        printf("Cart is full.\n");
-        return 0;
-    }
-
-    cart[cartCount].foodId = foods[position].id;
-
-    strcpy(cart[cartCount].foodName,
-           foods[position].name);
-
-    cart[cartCount].price = foods[position].price;
-
-    cart[cartCount].quantity = quantity;
-
-    cart[cartCount].subtotal =
-        foods[position].price * quantity;
-
-    cartCount++;
-
-    printf("Food added to cart.\n");
-
-    return 1;
-}/* Calculate total */
-
-double calculate_total()
-{
-    int i;
-    double total = 0;
-
-    for(i = 0; i < cartCount; i++)
-    {
-        total = total + cart[i].subtotal;
-    }
-
-    return total;
-}
-
