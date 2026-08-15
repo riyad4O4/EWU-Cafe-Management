@@ -41,3 +41,25 @@ int findFoodIndex(int id)
 
     return -1;
 }
+/* Save data to text file */
+void saveToFile()
+{
+    FILE *fp = fopen(FILE_NAME, "w");
+
+    if (fp == NULL)
+    {
+        printf("\n[Error] Could not save food data!\n");
+        return;
+    }
+
+    for (int i = 0; i < foodCount; i++)
+    {
+        fprintf(fp, "%d,%s,%.2f,%d\n",
+                foods[i].id,
+                foods[i].name,
+                foods[i].price,
+                foods[i].quantity);
+    }
+
+    fclose(fp);
+}
