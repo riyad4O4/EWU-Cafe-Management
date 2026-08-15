@@ -15,3 +15,15 @@ typedef struct {
 Food foods[MAX_FOOD];
 int foodCount = 0;
 
+
+/* Function Declarations */
+int findFoodIndex(int id);
+void saveToFile();
+void loadFromFile();
+void preloadDefaultFoods();
+void addFood();
+void editFood();
+void deleteFood();
+void viewFood();
+void updateQuantity();
+void searchFood();
