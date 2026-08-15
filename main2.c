@@ -63,3 +63,33 @@ void saveToFile()
 
     fclose(fp);
 }
+/* Load data from text file */
+void loadFromFile()
+{
+    FILE *fp = fopen(FILE_NAME, "r");
+
+    /*
+       If the file does not exist,
+       create the 11 default foods.
+    */
+    if (fp == NULL)
+    {
+        preloadDefaultFoods();
+        saveToFile();
+        return;
+    }
+
+    foodCount = 0;
+
+    while (foodCount < MAX_FOOD &&
+           fscanf(fp, "%d,%49[^,],%f,%d",
+                  &foods[foodCount].id,
+                  foods[foodCount].name,
+                  &foods[foodCount].price,
+                  &foods[foodCount].quantity) == 4)
+    {
+        foodCount++;
+    }
+
+    fclose(fp);
+}
