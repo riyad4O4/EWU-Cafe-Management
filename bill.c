@@ -38,20 +38,7 @@ int load_foods()
     the last two values are price and stock.
     the name is between id and price.*/
 
-// fscanf used to read data from file
-   /* while (fscanf(fp, "%d %s %lf %d",
-                  &foods[foodCount].id,
-                  foods[foodCount].name,
-                  &foods[foodCount].price,
-                  &foods[foodCount].stock) == 4)
-    {
-        foodCount++;
 
-        if (foodCount >= MAX_FOODS)
-        {
-            break;
-        }
-    }
 
     fclose(fp);
      //fclose used to close the file after reading
@@ -164,21 +151,7 @@ while(fgets(line, sizeof(line), fp) != NULL)
 }
 
 
-/*--------------------------------------------------
-    Display Available Foods
-    Return:
-    1 = Successfully displayed
-    0 = No food available
---------------------------------------------------
-int display_foods()
-{
-    int i;
 
-    if (foodCount == 0)
-    {
-        printf("No food available.\n");
-        return 0;
-    }
 */
 // fixed bug and edited from here .
 /*--------------------------------------------------
@@ -221,5 +194,202 @@ int display_foods()
 
     return 1;
 }
+/*
+    Find Food By ID
+*/
+
+int find_food_by_id(int id)
+{
+    int i;
+
+    for(i = 0; i < foodCount; i++)
+    {
+        if(foods[i].id == id)
+        {
+            return i;
+        }
+    }
+
+    return -1;
+}
+/*
+    Add Food To Cart
+*/
+
+int add_to_cart()
+{
+    int id;
+    int quantity;
+    int position;
+    int i;
+
+    printf("\nEnter Food ID: ");
+
+    if(scanf("%d", &id) != 1)
+    {
+        printf("Invalid ID. Please enter a number.\n");
+
+        while(getchar() != '\n')
+        {
+        }
+
+        return 0;
+    }
+
+    position = find_food_by_id(id);
+
+    if(position == -1)
+    {
+        printf("Food not found.\n");
+        return 0;
+    }
+
+    if(foods[position].stock <= 0)
+    {
+        printf("This food is out of stock.\n");
+        return 0;
+    }
+
+    printf("Enter Quantity: ");
+
+    if(scanf("%d", &quantity) != 1)
+    {
+        printf("Invalid quantity. Please enter a number.\n");
+
+        while(getchar() != '\n')
+        {
+        }
+
+        return 0;
+    }
+
+    if(quantity <= 0)
+    {
+        printf("Quantity must be greater than 0.\n");
+        return 0;
+    }
+printf("Enter Quantity: ");
+
+    if(scanf("%d", &quantity) != 1)
+    {
+        printf("Invalid quantity. Please enter a number.\n");
+
+        while(getchar() != '\n')
+        {
+        }
+
+        return 0;
+    }
+
+    if(quantity <= 0)
+    {
+        printf("Quantity must be greater than 0.\n");
+        return 0;
+    }
+
+    /*
+       Check actual remaining stock.
+    */
+
+    if(quantity > foods[position].stock)
+    {
+        printf("Not enough stock.\n");
+        printf("Available stock: %d\n",
+               foods[position].stock);
+
+        return 0;
+    }
+
+
+    /*
+       Check whether the same food
+       already exists in the cart.
+    */
+
+    for(i = 0; i < cartCount; i++)
+    {
+        if(cart[i].foodId == foods[position].id)
+        {
+            /*
+               Increase existing quantity.
+            */
+
+            cart[i].quantity =
+                cart[i].quantity + quantity;
+
+            /*
+               Recalculate subtotal.
+            */
+
+            cart[i].subtotal =
+                cart[i].price * cart[i].quantity;
+
+            /*
+               *****
+               Reduce stock immediately.
+            */
+
+            foods[position].stock =
+                foods[position].stock - quantity;
+
+            printf("\nFood quantity updated in cart.\n");
+
+            printf("New quantity: %d\n",
+                   cart[i].quantity);
+
+            printf("Remaining stock: %d\n",
+                   foods[position].stock);
+
+            return 1;
+        }
+    }
+
+
+    /*
+       If food does not already exist,
+       create a new cart item.
+    */
+
+    if(cartCount >= MAX_CART)
+    {
+        printf("Cart is full.\n");
+        return 0;
+    }
+
+    cart[cartCount].foodId =
+        foods[position].id;
+
+    strcpy(cart[cartCount].foodName,
+           foods[position].name);
+
+    cart[cartCount].price =
+        foods[position].price;
+
+    cart[cartCount].quantity =
+        quantity;
+
+    cart[cartCount].subtotal =
+        foods[position].price * quantity;
+
+
+    /*
+       IMPORTANT:
+       Reduce stock immediately after
+       adding food to cart.
+    */
+
+    foods[position].stock =
+        foods[position].stock - quantity;
+
+    cartCount++;
+
+    printf("\nFood added to cart successfully.\n");
+
+    printf("Remaining stock: %d\n",
+           foods[position].stock);
+
+    return 1;
+}
+
 
 
