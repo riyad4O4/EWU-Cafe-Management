@@ -27,3 +27,17 @@ void deleteFood();
 void viewFood();
 void updateQuantity();
 void searchFood();
+
+/* Find food by ID */
+int findFoodIndex(int id)
+{
+    for (int i = 0; i < foodCount; i++)
+    {
+        if (foods[i].id == id)
+        {
+            return i;
+        }
+    }
+
+    return -1;
+}
