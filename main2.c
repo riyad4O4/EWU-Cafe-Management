@@ -93,3 +93,28 @@ void loadFromFile()
 
     fclose(fp);
 }
+/* Create the original 11 foods */
+void preloadDefaultFoods()
+{
+    Food defaultItems[] =
+    {
+        {1, "Chicken Burger", 250, 20},
+        {2, "Beef Burger", 300, 15},
+        {3, "Cheese Burger", 280, 15},
+        {4, "Chicken Pizza", 450, 10},
+        {5, "Beef Pizza", 500, 10},
+        {6, "French Fries", 150, 30},
+        {7, "Lemonade", 100, 25},
+        {8, "Milkshake", 200, 20},
+        {9, "Chocolate Shake", 220, 15},
+        {10, "Coffee", 120, 40},
+        {11, "Tea", 80, 50}
+    };
+
+    foodCount = 11;
+
+    for (int i = 0; i < foodCount; i++)
+    {
+        foods[i] = defaultItems[i];
+    }
+}
