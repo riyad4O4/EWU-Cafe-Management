@@ -118,3 +118,45 @@ void preloadDefaultFoods()
         foods[i] = defaultItems[i];
     }
 }
+/* 1. ADD FOOD */
+void addFood()
+{
+    if (foodCount >= MAX_FOOD)
+    {
+        printf("\n[Error] Food list is full!\n");
+        return;
+    }
+
+    printf("\n========== ADD FOOD ==========\n");
+
+    /* Ask for new Food ID */
+    printf("Enter Food ID: ");
+    scanf("%d", &foods[foodCount].id);
+
+    /* Check if ID already exists */
+    if (findFoodIndex(foods[foodCount].id) != -1)
+    {
+        printf("\n[Error] This Food ID already exists!\n");
+        return;
+    }
+
+    /* Ask for new Food Name */
+    printf("Enter Food Name: ");
+    scanf(" %[^\n]", foods[foodCount].name);
+
+    /* Ask for new Food Price */
+    printf("Enter Food Price: ");
+    scanf("%f", &foods[foodCount].price);
+
+    /* Ask for new Food Quantity */
+    printf("Enter Food Quantity: ");
+    scanf("%d", &foods[foodCount].quantity);
+
+    /* Increase number of foods */
+    foodCount++;
+
+    /* Save new food permanently */
+    saveToFile();
+
+    printf("\nFood added successfully!\n");
+}
