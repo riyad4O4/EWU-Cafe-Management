@@ -1,4 +1,10 @@
-#include<stdio.h>
-#include "menu.h"
+#include <stdio.h>
+#include "main_menu.h"
+
+int menu()
+{
+    //code
+}
+
 
 
