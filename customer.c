@@ -1,7 +1,7 @@
 
 #include <stdio.h>
 #include <string.h>
-#include "customer.h"
+#include "customer.h"                                // stident id: 2026-2-60-024
 
 struct Food food[MAX_FOOD];
 struct Cart cart[MAX_CART];
