@@ -26,7 +26,7 @@ int loadFood()
 
     foodCount = 0;
 
-    while(fscanf(file, "%d %s %f %d",
+    while(fscanf(file, "%d %s %f %d", // fscanf reads formatted input from the file and stores it in the food array
                  &food[foodCount].id,
                  food[foodCount].name,
                  &food[foodCount].price,
@@ -40,13 +40,13 @@ int loadFood()
         }
     }
 
-    fclose(file);
+    fclose(file); // fclose closes the file after reading
 
     return 1;
 }
 
 
-/* ================= SAVE FOOD TO FILE ================= */
+/*  SAVE FOOD TO FILE  */
 
 int saveFood()
 {
@@ -76,7 +76,7 @@ int saveFood()
 }
 
 
-/* ================= VIEW MENU ================= */
+/*  VIEW MENU  */
 
 int viewMenu()
 {
@@ -112,7 +112,7 @@ int viewMenu()
 }
 
 
-/* ================= SEARCH FOOD ================= */
+/*  SEARCH FOOD  */
 
 int searchFood()
 {
@@ -151,7 +151,7 @@ int searchFood()
 }
 
 
-/* ================= SELECT FOOD ================= */
+/* SELECT FOOD  */
 
 int selectFood()
 {
@@ -246,7 +246,7 @@ int selectFood()
 }
 
 
-/* ================= ADD MORE FOOD ================= */
+/* ADD MORE FOOD  */
 
 int addToCart()
 {
@@ -286,7 +286,7 @@ int addToCart()
 }
 
 
-/* ================= VIEW CART ================= */
+/*  VIEW CART  */
 
 int viewCart()
 {
@@ -330,7 +330,7 @@ int viewCart()
 }
 
 
-/* ================= REMOVE ITEM ================= */
+/*  REMOVE ITEM  */
 
 int removeItem()
 {
@@ -401,7 +401,7 @@ int removeItem()
 }
 
 
-/* ================= GENERATE BILL ================= */
+/*  GENERATE BILL  */
 
 int generateBill()
 {
@@ -451,7 +451,7 @@ int generateBill()
 }
 
 
-/* ================= CUSTOMER MENU ================= */
+/*  CUSTOMER MENU  */
 
 int customerMenu()
 {
