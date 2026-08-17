@@ -41,11 +41,12 @@ int load_foods()
     format of foods.txt:
     1 chiken fry 120.00 10
     here the first word is ID.
-    the last two values are price and stock.
-    the name is between id and price.*/
+    the last two values are price and stock.   
+         the name is between id and price.*/
+   
+   
+         while(fgets(line, sizeof(line), fp) != NULL)
 
-}
-while(fgets(line, sizeof(line), fp) != NULL)
     {
         char name[50];
         double price;
