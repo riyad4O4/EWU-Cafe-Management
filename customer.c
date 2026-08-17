@@ -455,7 +455,7 @@ int generateBill()
 
 int customerMenu()
 {
-    int choice;
+        int choice;
 
     loadFood();
 
