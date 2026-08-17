@@ -1,165 +1,84 @@
 
-#include <stdio.h>      
+#include <stdio.h>
 #include <string.h>
+#include "customer.h"
 
-#include "bill.h"
-                                                        //student ID: 2026-2-60-024
-#include <stdlib.h>
-#include <string.h>
+struct Food food[MAX_FOOD];
+struct Cart cart[MAX_CART];
 
-#include "bill.h"
-
-    // Global variables 
-
-    Food foods[MAX_FOODS];
 int foodCount = 0;
-
-CartItem cart[MAX_CART];
 int cartCount = 0;
 
-//load foods from foods.txt
 
+/* LOAD FOOD FROM FILE */
 
-int load_foods()
-{  
-    //file *fp used for file handiling
-    FILE *fp;
+int loadFood()
+{
+    FILE *file;  // load food from file using file pointer
 
-    fp = fopen("foods.txt", "r");
+    file = fopen("food.txt", "r");
 
-    if (fp == NULL)
+    if(file == NULL)
     {
-        printf("\nCannot open foods.txt\n");
+        printf("\nFood file not found!\n");
         return 0;
     }
 
     foodCount = 0;
 
-
-    /*EAMPLE :
-    
-    format of foods.txt:
-    1 chiken fry 120.00 10
-    here the first word is ID.
-    the last two values are price and stock.   
-         the name is between id and price.*/
-   
-   
-         while(fgets(line, sizeof(line), fp) != NULL)
-
+    while(fscanf(file, "%d %s %f %d",
+                 &food[foodCount].id,
+                 food[foodCount].name,
+                 &food[foodCount].price,
+                 &food[foodCount].quantity) == 4)
     {
-        char name[50];
-        double price;
-        int id;
-        int stock;
-        int i;
-        int result;
+        foodCount++;
 
-        result = sscanf(line, "%d %C %lf %d",
-                        &id,
-                        name,
-                        &price,
-                        &stock);
-
-        if(result == 4)
-                {
-            /*
-               The above method can still cause problems
-               because name may contain price and stock.
-
-               So we manually find the last two values.
-            */
-
-            i = strlen(line) - 1;
-
-            while(i >= 0 && line[i] == '\n')
-            {
-                line[i] = '\0';
-                i--;
-            }
-
-            /* Read ID */
-            if(sscanf(line, "%d", &id) != 1)
-            {
-                continue;
-            }
-
-            /*
-               Find the food name and last two numbers.
-               This method expects:
-               ID Food_Name Price Stock
-            */
-            {
-                char tempName[50];
-
-                if(sscanf(line, "%d %49[^\n]", &id, tempName) == 2)
-                {
-                    char *lastSpace;
-                    char *secondLastSpace;
-
-                    lastSpace = strrchr(tempName, ' ');
-
-                    if(lastSpace == NULL)
-                    {
-                        continue;
-                    }
-
-                    stock = 0;
-                    price = 0;
-
-                    sscanf(lastSpace + 1, "%d", &stock);
-
-                    *lastSpace = '\0';
-
-                    secondLastSpace = strrchr(tempName, ' ');
-
-                    if(secondLastSpace == NULL)
-                    {
-                        continue;
-                    }
-
-                    price = 0;
-                    sscanf(secondLastSpace + 1, "%lf", &price);
-
-                    *secondLastSpace = '\0';
-
-                    strcpy(name, tempName);
-                }
-                else
-                {
-                    continue;
-                }
-            }
-
-            if(foodCount < MAX_FOODS)
-            {
-                foods[foodCount].id = id;
-
-                strcpy(foods[foodCount].name, name);
-
-                foods[foodCount].price = price;
-
-                foods[foodCount].stock = stock;
-
-                foodCount++;
-            }
+        if(foodCount >= MAX_FOOD)
+        {
+            break;
         }
     }
 
-    fclose(fp);
+    fclose(file);
 
     return 1;
 }
 
 
+/* ================= SAVE FOOD TO FILE ================= */
+
+int saveFood()
+{
+    FILE *file;
+    int i;
+
+    file = fopen("food.txt", "w");
+
+    if(file == NULL)
+    {
+        printf("\nCould not save food information.\n");
+        return 0;
+    }
+
+    for(i = 0; i < foodCount; i++)
+    {
+        fprintf(file, "%d %s %.2f %d\n",
+                food[i].id,
+                food[i].name,
+                food[i].price,
+                food[i].quantity);
+    }
+
+    fclose(file);
+
+    return 1;
+}
 
 
-// fixed bug and edited from here .
-/*
-    Display Available Foods
-*/
+/* ================= VIEW MENU ================= */
 
-int display_foods()
+int viewMenu()
 {
     int i;
 
@@ -168,248 +87,437 @@ int display_foods()
         printf("\nNo food available.\n");
         return 0;
     }
-// fixed bug and edited from here .
 
-    printf("\n=============================================\n");
-    printf("          UNIVERSITY CAFE MENU\n");
-    printf("=============================================\n");
+    printf("\n");
+    printf("============================================================\n");
+    printf("                     CAFE FOOD MENU\n");
+    printf("============================================================\n");
 
-    printf("%-5s %-25s %-10s %-10s\n",
-           "ID",
-           "Food",
-           "Price",
-           "Stock");
+    printf("ID\tFood\t\tPrice\t\tAvailable\n");
 
-    printf("=============================================\n");
+    printf("------------------------------------------------------------\n");
 
     for(i = 0; i < foodCount; i++)
     {
-        printf("%-5d %-25s %-10.2lf %-10d\n",
-               foods[i].id,
-               foods[i].name,
-               foods[i].price,
-               foods[i].stock);
+        printf("%d\t%-12s\t%.2f Tk\t%d\n",
+               food[i].id,
+               food[i].name,
+               food[i].price,
+               food[i].quantity);
     }
 
-    printf("=============================================\n");
+    printf("============================================================\n");
 
     return 1;
 }
-/*
-    Find Food By ID
-*/
 
-int find_food_by_id(int id)
+
+/* ================= SEARCH FOOD ================= */
+
+int searchFood()
 {
+    char searchName[30];
     int i;
+    int found = 0;
+
+    printf("\nEnter food name to search: ");
+    scanf("%s", searchName);
 
     for(i = 0; i < foodCount; i++)
     {
-        if(foods[i].id == id)
+        if(strcmp(food[i].name, searchName) == 0)
         {
-            return i;
+            printf("\nFood Found!\n");
+            printf("-----------------------------\n");
+
+            printf("ID          : %d\n", food[i].id);
+            printf("Name        : %s\n", food[i].name);
+            printf("Price       : %.2f Tk\n", food[i].price);
+            printf("Availability: %d\n", food[i].quantity);
+
+            printf("-----------------------------\n");
+
+            found = 1;
+            break;
         }
     }
 
-    return -1;
-}
-/*
-    Add Food To Cart
-*/
+    if(found == 0)
+    {
+        printf("\nFood not found.\n");
+    }
 
-int add_to_cart()
+    return found;
+}
+
+
+/* ================= SELECT FOOD ================= */
+
+int selectFood()
 {
     int id;
     int quantity;
-    int position;
     int i;
+    int position = -1;
+
+    viewMenu();
 
     printf("\nEnter Food ID: ");
+    scanf("%d", &id);
 
-    if(scanf("%d", &id) != 1)
+    /* Find food */
+
+    for(i = 0; i < foodCount; i++)
     {
-        printf("Invalid ID. Please enter a number.\n");
-
-        while(getchar() != '\n')
+        if(food[i].id == id)
         {
+            position = i;
+            break;
         }
-
-        return 0;
     }
-
-    position = find_food_by_id(id);
 
     if(position == -1)
     {
-        printf("Food not found.\n");
+        printf("\nInvalid Food ID.\n");
         return 0;
     }
 
-    if(foods[position].stock <= 0)
+    printf("\nSelected Food : %s\n", food[position].name);
+    printf("Price         : %.2f Tk\n", food[position].price);
+    printf("Available     : %d\n", food[position].quantity);
+
+    if(food[position].quantity <= 0)
     {
-        printf("This food is out of stock.\n");
+        printf("\nSorry! This food is not available.\n");
         return 0;
     }
 
-    printf("Enter Quantity: ");
-
-    if(scanf("%d", &quantity) != 1)
-    {
-        printf("Invalid quantity. Please enter a number.\n");
-
-        while(getchar() != '\n')
-        {
-        }
-
-        return 0;
-    }
+    printf("\nEnter Quantity: ");
+    scanf("%d", &quantity);
 
     if(quantity <= 0)
     {
-        printf("Quantity must be greater than 0.\n");
+        printf("\nInvalid quantity.\n");
         return 0;
     }
-printf("Enter Quantity: ");
 
-    if(scanf("%d", &quantity) != 1)
+    if(quantity > food[position].quantity)
     {
-        printf("Invalid quantity. Please enter a number.\n");
-
-        while(getchar() != '\n')
-        {
-        }
+        printf("\nSorry! Only %d item(s) are available.\n",
+               food[position].quantity);
 
         return 0;
     }
 
-    if(quantity <= 0)
-    {
-        printf("Quantity must be greater than 0.\n");
-        return 0;
-    }
+    /* Add item to cart */
 
-    /*
-       Check actual remaining stock.
-    */
+    cart[cartCount].id = food[position].id;
 
-    if(quantity > foods[position].stock)
-    {
-        printf("Not enough stock.\n");
-        printf("Available stock: %d\n",
-               foods[position].stock);
-
-        return 0;
-    }
-
-
-    /*
-       Check whether the same food
-       already exists in the cart.
-    */
-
-    for(i = 0; i < cartCount; i++)
-    {
-        if(cart[i].foodId == foods[position].id)
-        {
-            /*
-               Increase existing quantity.
-            */
-
-            cart[i].quantity =
-                cart[i].quantity + quantity;
-
-            /*
-               Recalculate subtotal.
-            */
-
-            cart[i].subtotal =
-                cart[i].price * cart[i].quantity;
-
-            /*
-               *****
-               Reduce stock immediately.
-            */
-
-            foods[position].stock =
-                foods[position].stock - quantity;
-
-            printf("\nFood quantity updated in cart.\n");
-
-            printf("New quantity: %d\n",
-                   cart[i].quantity);
-
-            printf("Remaining stock: %d\n",
-                   foods[position].stock);
-
-            return 1;
-        }
-    }
-
-
-    /*
-       If food does not already exist,
-       create a new cart item.
-    */
-
-    if(cartCount >= MAX_CART)
-    {
-        printf("Cart is full.\n");
-        return 0;
-    }
-
-    cart[cartCount].foodId =
-        foods[position].id;
-
-    strcpy(cart[cartCount].foodName,
-           foods[position].name);
+    strcpy(cart[cartCount].name,
+           food[position].name);
 
     cart[cartCount].price =
-        foods[position].price;
+        food[position].price;
 
     cart[cartCount].quantity =
         quantity;
 
     cart[cartCount].subtotal =
-        foods[position].price * quantity;
-
-
-    /*
-       IMPORTANT:
-       Reduce stock immediately after
-       adding food to cart.
-    */
-
-    foods[position].stock =
-        foods[position].stock - quantity;
+        food[position].price * quantity;
 
     cartCount++;
 
-    printf("\nFood added to cart successfully.\n");
+    /* Update available quantity */
 
-    printf("Remaining stock: %d\n",
-           foods[position].stock);
+    food[position].quantity =
+        food[position].quantity - quantity;
+
+    saveFood();
+
+    printf("\nFood added to cart successfully!\n");
+
+    printf("Item ID       : %d\n", food[position].id);
+    printf("Item Name     : %s\n", food[position].name);
+    printf("Price         : %.2f Tk\n", food[position].price);
+    printf("Quantity      : %d\n", quantity);
+    printf("Remaining     : %d\n", food[position].quantity);
 
     return 1;
 }
 
-/*
-    Calculate Total
-*/
 
-double calculate_total()
+/* ================= ADD MORE FOOD ================= */
+
+int addToCart()
 {
-    int i;
-    double total;
+    int choice;
 
-    total = 0;
-
-    for(i = 0; i < cartCount; i++)
+    while(1)
     {
-        total = total + cart[i].subtotal;
+        printf("\n====================================\n");
+        printf("             ADD FOOD\n");
+        printf("====================================\n");
+
+        if(selectFood() == 0)
+        {
+            printf("\nFood was not added.\n");
+        }
+
+        printf("\nDo you want to add another item?\n");
+        printf("1. Yes\n");
+        printf("2. No\n");
+
+        printf("Enter choice: ");
+        scanf("%d", &choice);
+
+        if(choice == 2)
+        {
+            break;
+        }
+
+        if(choice != 1)
+        {
+            printf("\nInvalid choice.\n");
+            break;
+        }
     }
 
-    return total;
+    return 1;
 }
 
 
+/* ================= VIEW CART ================= */
 
+int viewCart()
+{
+    int i;
+    float total = 0;
+
+    if(cartCount == 0)
+    {
+        printf("\nYour cart is empty.\n");
+        return 0;
+    }
+
+    printf("\n");
+    printf("============================================================\n");
+    printf("                       YOUR CART\n");
+    printf("============================================================\n");
+
+    printf("ID\tFood\t\tPrice\tQty\tSubtotal\n");
+
+    printf("------------------------------------------------------------\n");
+
+    for(i = 0; i < cartCount; i++)
+    {
+        printf("%d\t%-12s\t%.2f\t%d\t%.2f\n",
+               cart[i].id,
+               cart[i].name,
+               cart[i].price,
+               cart[i].quantity,
+               cart[i].subtotal);
+
+        total = total + cart[i].subtotal;
+    }
+
+    printf("------------------------------------------------------------\n");
+
+    printf("Total : %.2f Tk\n", total);
+
+    printf("============================================================\n");
+
+    return 1;
+}
+
+
+/* ================= REMOVE ITEM ================= */
+
+int removeItem()
+{
+    int id;
+    int i;
+    int j;
+    int found = -1;
+    int quantityBack;
+
+    if(cartCount == 0)
+    {
+        printf("\nYour cart is empty.\n");
+        return 0;
+    }
+
+    viewCart();
+
+    printf("\nEnter Food ID to remove: ");
+    scanf("%d", &id);
+
+    /* Find item in cart */
+
+    for(i = 0; i < cartCount; i++)
+    {
+        if(cart[i].id == id)
+        {
+            found = i;
+            break;
+        }
+    }
+
+    if(found == -1)
+    {
+        printf("\nThis item is not in your cart.\n");
+        return 0;
+    }
+
+    quantityBack = cart[found].quantity;
+
+    /* Return quantity to food stock */
+
+    for(i = 0; i < foodCount; i++)
+    {
+        if(food[i].id == id)
+        {
+            food[i].quantity =
+                food[i].quantity + quantityBack;
+
+            break;
+        }
+    }
+
+    /* Remove item from cart */
+
+    for(j = found; j < cartCount - 1; j++)
+    {
+        cart[j] = cart[j + 1];
+    }
+
+    cartCount--;
+
+    saveFood();
+
+    printf("\nItem removed successfully.\n");
+    printf("Returned Quantity : %d\n", quantityBack);
+
+    return 1;
+}
+
+
+/* ================= GENERATE BILL ================= */
+
+int generateBill()
+{
+    int i;
+    float total = 0;
+
+    if(cartCount == 0)
+    {
+        printf("\nYour cart is empty.\n");
+        return 0;
+    }
+
+    printf("\n");
+    printf("============================================================\n");
+    printf("                    WELCOME TO THE CAFE\n");
+    printf("============================================================\n");
+
+    printf("                     FINAL BILL\n");
+
+    printf("------------------------------------------------------------\n");
+
+    printf("ID\tFood\t\tQty\tPrice\tSubtotal\n");
+
+    printf("------------------------------------------------------------\n");
+
+    for(i = 0; i < cartCount; i++)
+    {
+        printf("%d\t%-12s\t%d\t%.2f\t%.2f\n",
+               cart[i].id,
+               cart[i].name,
+               cart[i].quantity,
+               cart[i].price,
+               cart[i].subtotal);
+
+        total = total + cart[i].subtotal;
+    }
+
+    printf("------------------------------------------------------------\n");
+
+    printf("Total Amount : %.2f Tk\n", total);
+
+    printf("============================================================\n");
+    printf("              THANK YOU FOR VISITING!\n");
+    printf("============================================================\n");
+
+    return 1;
+}
+
+
+/* ================= CUSTOMER MENU ================= */
+
+int customerMenu()
+{
+    int choice;
+
+    loadFood();
+
+    while(1)
+    {
+        printf("\n");
+        printf("============================================\n");
+        printf("           WELCOME TO THE CAFE\n");
+        printf("============================================\n");
+
+        printf("1. View Menu\n");
+        printf("2. Search Food\n");
+        printf("3. Select Food\n");
+        printf("4. Add More Items\n");
+        printf("5. View Cart\n");
+        printf("6. Remove Item\n");
+        printf("7. Generate Bill\n");
+        printf("8. Exit\n");
+
+        printf("============================================\n");
+
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch(choice)
+        {
+            case 1:
+                viewMenu();
+                break;
+
+            case 2:
+                searchFood();
+                break;
+
+            case 3:
+                selectFood();
+                break;
+
+            case 4:
+                addToCart();
+                break;
+
+            case 5:
+                viewCart();
+                break;
+
+            case 6:
+                removeItem();
+                break;
+
+            case 7:
+                generateBill();
+                break;
+
+            case 8:
+                printf("\nThank you for visiting the cafe.\n");
+                return 1;
+
+            default:
+                printf("\nInvalid choice.\n");
+        }
+    }
+
+    return 0;
+}
