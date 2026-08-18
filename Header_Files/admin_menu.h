@@ -1,6 +1,9 @@
 #ifndef ADMIN_MENU_H
 #define ADMIN_MENU_H
-
+int findFoodIndex(int id);
+int saveToFile();
+int loadFromFile();
+int preloadDefaultFoods();
 int add_Food();
 int edit_Food();
 int delete_Food();
