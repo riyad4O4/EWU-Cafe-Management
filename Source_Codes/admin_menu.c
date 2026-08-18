@@ -1,6 +1,13 @@
 #include <stdio.h>
 #include "admin_menu.h"
-typedef struct {
+
+
+#include <string.h>
+
+#define MAX_FOOD 100
+#define FILE_NAME "food_data.txt"
+typedef struct
+{
     int id;
     char name[50];
     float price;
@@ -62,11 +69,11 @@ void loadFromFile()
     foodCount = 0;
 
     while (foodCount < MAX_FOOD &&
-           fscanf(fp, "%d,%49[^,],%f,%d",
-                  &foods[foodCount].id,
-                  foods[foodCount].name,
-                  &foods[foodCount].price,
-                  &foods[foodCount].quantity) == 4)
+            fscanf(fp, "%d,%49[^,],%f,%d",
+                   &foods[foodCount].id,
+                   foods[foodCount].name,
+                   &foods[foodCount].price,
+                   &foods[foodCount].quantity) == 4)
     {
         foodCount++;
     }
@@ -100,7 +107,7 @@ void preloadDefaultFoods()
 }
 int add_Food()
 {
-if (foodCount >= MAX_FOOD)
+    if (foodCount >= MAX_FOOD)
     {
         printf("\n[Error] Food list is full!\n");
         return;
@@ -141,21 +148,140 @@ if (foodCount >= MAX_FOOD)
 }
 int edit_Food()
 {
+    int id;
 
+    printf("\n========== EDIT FOOD ==========\n");
+    printf("Enter Food ID to edit: ");
+    scanf("%d", &id);
+
+    int index = findFoodIndex(id);
+
+    if (index == -1)
+    {
+        printf("\n[Error] Food with ID %d not found.\n", id);
+        return;
+    }
+
+    printf("\nCurrent Name: %s\n", foods[index].name);
+    printf("Current Price: %.2f\n", foods[index].price);
+
+    printf("\nEnter New Name: ");
+    scanf(" %[^\n]", foods[index].name);
+
+    printf("Enter New Price: ");
+    scanf("%f", &foods[index].price);
+
+    saveToFile();
+
+    printf("\nFood updated successfully!\n");
 }
 int delete_Food()
 {
+    int id;
 
+    printf("\n========== DELETE FOOD ==========\n");
+
+    printf("Enter Food ID to delete: ");
+    scanf("%d", &id);
+
+    int index = findFoodIndex(id);
+
+    if (index == -1)
+    {
+        printf("\n[Error] Food with ID %d not found.\n", id);
+        return;
+    }
+
+    for (int i = index; i < foodCount - 1; i++)
+    {
+        foods[i] = foods[i + 1];
+    }
+
+    foodCount--;
+
+    saveToFile();
+
+    printf("\nFood item deleted successfully!\n");
 }
 int view_FoodList()
 {
+    printf("\n========== FOOD MENU ==========\n");
 
+    if (foodCount == 0)
+    {
+        printf("No food items available.\n");
+    }
+    else
+    {
+        for (int i = 0; i < foodCount; i++)
+        {
+            printf("%d. %-20s Price: %.2f  Available: %d\n",
+                   foods[i].id,
+                   foods[i].name,
+                   foods[i].price,
+                   foods[i].quantity);
+        }
+    }
+
+    printf("===============================\n");
+}
 }
 int update_Quantity()
 {
+    int id;
 
+    printf("\n========== UPDATE QUANTITY ==========\n");
+
+    printf("Enter Food ID: ");
+    scanf("%d", &id);
+
+    int index = findFoodIndex(id);
+
+    if (index == -1)
+    {
+        printf("\n[Error] Food with ID %d not found.\n", id);
+        return;
+    }
+
+    printf("\nFood: %s\n", foods[index].name);
+    printf("Current Quantity: %d\n", foods[index].quantity);
+
+    printf("Enter New Quantity: ");
+    scanf("%d", &foods[index].quantity);
+
+    saveToFile();
+
+    printf("\nQuantity updated successfully!\n");
+}
+
+
+/* 6. SEARCH FOOD */
 }
 int search_Food()
 {
+    int id;
 
+    printf("\n========== SEARCH FOOD ==========\n");
+
+    printf("Enter Food ID to search: ");
+    scanf("%d", &id);
+
+    int index = findFoodIndex(id);
+
+    if (index == -1)
+    {
+        printf("\n[Error] Food item not found.\n");
+    }
+    else
+    {
+        printf("\n========== ITEM FOUND ==========\n");
+
+        printf("ID: %d\n", foods[index].id);
+        printf("Name: %s\n", foods[index].name);
+        printf("Price: %.2f\n", foods[index].price);
+        printf("Available: %d\n", foods[index].quantity);
+
+        printf("================================\n");
+    }
+}
 }
