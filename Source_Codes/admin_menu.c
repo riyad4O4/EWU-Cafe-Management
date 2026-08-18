@@ -14,8 +14,8 @@ typedef struct
     int quantity;
 } Food;
 
-Food foods[MAX_FOOD];
-int foodCount = 0;
+static Food foods[MAX_FOOD];
+static int foodCount = 0;
 int findFoodIndex(int id)
 {
     for (int i = 0; i < foodCount; i++)
