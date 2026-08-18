@@ -303,3 +303,68 @@ void searchFood()
         printf("================================\n");
     }
 }
+/* MAIN MENU */
+int main()
+{
+    /* Load saved food data when program starts */
+    loadFromFile();
+
+    int choice;
+
+    while (1)
+    {
+        printf("\n====================================\n");
+        printf("       TASK 3 - ADMIN MENU          \n");
+        printf("====================================\n");
+
+        printf("1. Add Food\n");
+        printf("2. Edit Food\n");
+        printf("3. Delete Food\n");
+        printf("4. View Food List\n");
+        printf("5. Update Quantity\n");
+        printf("6. Search Food\n");
+        printf("7. Exit\n");
+
+        printf("Enter choice (1-7): ");
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+            case 1:
+                addFood();
+                break;
+
+            case 2:
+                editFood();
+                break;
+
+            case 3:
+                deleteFood();
+                break;
+
+            case 4:
+                viewFood();
+                break;
+
+            case 5:
+                updateQuantity();
+                break;
+
+            case 6:
+                searchFood();
+                break;
+
+            case 7:
+                saveToFile();
+
+                printf("\nExiting Admin Panel. Goodbye!\n");
+
+                return 0;
+
+            default:
+                printf("\nInvalid choice! Please try again.\n");
+        }
+    }
+
+    return 0;
+}
