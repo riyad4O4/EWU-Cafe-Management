@@ -29,7 +29,7 @@ int findFoodIndex(int id)
     return -1;
 }
 /* Save data to text file */
-void saveToFile()
+int saveToFile()
 {
     FILE *fp = fopen(FILE_NAME, "w");
 
@@ -49,9 +49,10 @@ void saveToFile()
     }
 
     fclose(fp);
+    return 0;
 }
 /* Load data from text file */
-void loadFromFile()
+int loadFromFile()
 {
     FILE *fp = fopen(FILE_NAME, "r");
 
@@ -79,9 +80,10 @@ void loadFromFile()
     }
 
     fclose(fp);
+    return 0;
 }
 /* Create the original 11 foods */
-void preloadDefaultFoods()
+int preloadDefaultFoods()
 {
     Food defaultItems[] =
     {
@@ -104,6 +106,7 @@ void preloadDefaultFoods()
     {
         foods[i] = defaultItems[i];
     }
+    return 0;
 }
 int add_Food()
 {
@@ -145,6 +148,7 @@ int add_Food()
     saveToFile();
 
     printf("\nFood added successfully!\n");
+    return 0;
 }
 int edit_Food()
 {
@@ -174,6 +178,7 @@ int edit_Food()
     saveToFile();
 
     printf("\nFood updated successfully!\n");
+    return 0;
 }
 int delete_Food()
 {
@@ -202,6 +207,7 @@ int delete_Food()
     saveToFile();
 
     printf("\nFood item deleted successfully!\n");
+    return 0;
 }
 int view_FoodList()
 {
@@ -224,8 +230,9 @@ int view_FoodList()
     }
 
     printf("===============================\n");
+    return 0;
 }
-}
+
 int update_Quantity()
 {
     int id;
@@ -252,6 +259,7 @@ int update_Quantity()
     saveToFile();
 
     printf("\nQuantity updated successfully!\n");
+    return 0;
 }
 
 
@@ -283,5 +291,6 @@ int search_Food()
 
         printf("================================\n");
     }
+    return 0;
 }
-}
+
