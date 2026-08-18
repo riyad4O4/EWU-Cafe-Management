@@ -294,3 +294,20 @@ int search_Food()
     return 0;
 }
 
+int view_customer_list()
+{
+    printf("\n[TODO] Customer list feature not implemented yet.\n");
+    return 0;
+}
+
+int view_all_orders()
+{
+    printf("\n[TODO] Orders feature not implemented yet.\n");
+    return 0;
+}
+
+int view_sales_report()
+{
+    printf("\n[TODO] Sales report feature not implemented yet.\n");
+    return 0;
+}
