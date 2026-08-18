@@ -78,7 +78,7 @@ int main()
             scanf("%d", &choice);
             if (choice == 1)
             {
-                edit_food();
+                edit_Food();
                 printf("Food edited successfully.\n");
             }
             else if (choice == 2)
