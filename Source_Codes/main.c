@@ -79,7 +79,6 @@ int main()
             if (choice == 1)
             {
                 edit_Food();
-                printf("Food edited successfully.\n");
             }
             else if (choice == 2)
             {
