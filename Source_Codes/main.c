@@ -1,4 +1,9 @@
+// ID: 2026-2-60-543
 #include <stdio.h>
+#include "main_menu.h"
+#include "Account.h"
+#include "admin_menu.h"
+#include "customer.h"
 #include "main_menu.h"
 int main()
 {
@@ -137,4 +142,3 @@ int main()
 
     return main();
 }
-
