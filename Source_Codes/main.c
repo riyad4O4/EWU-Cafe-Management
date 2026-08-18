@@ -31,8 +31,8 @@ int main()
         }
         else if (choice == 2)
         {
-            log_in();
-            int customerMenu();
+            //log_in();
+            customerMenu();
         }
     }
 
@@ -50,7 +50,7 @@ int main()
         }
         else if (choice == 2)
         {
-            log_in();
+            //log_in();
             int customerMenu();
         }
     }
@@ -69,7 +69,7 @@ int main()
         }
         else if (choice == 2)
         {
-            log_in();
+            //log_in();
             printf("1. Edit Food");
             printf("2. view customer list");
             printf("3. View all orders");
