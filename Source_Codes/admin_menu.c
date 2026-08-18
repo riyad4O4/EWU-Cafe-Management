@@ -264,7 +264,7 @@ int update_Quantity()
 
 
 /* 6. SEARCH FOOD */
-}
+
 int search_Food()
 {
     int id;
