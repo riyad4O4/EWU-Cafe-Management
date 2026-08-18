@@ -19,7 +19,7 @@ int main()
 
     // Faculty
 
-    if (choice == 1) 
+    if (choice == 1)
     {
         printf("1.Register\n");
         printf("2.Log in\n");
@@ -31,31 +31,14 @@ int main()
         }
         else if (choice == 2)
         {
-            log_in();
-            printf("1. View Menu\n");
-            printf("2. Search food\n");
-            printf("3. View profile\n");
-            printf("Enter your choice: ");
-            scanf("%d", &choice);
-            if (choice == 1)
-            {
-                view_FoodList();
-            }
-            else if (choice == 2)
-            {
-                search_food();
-            }
-            else if (choice == 3)
-            {
-                view_profile();
-            }
-
+            //log_in();
+            customerMenu();
         }
     }
 
     // Student
 
-    else if (choice == 2) 
+    else if (choice == 2)
     {
         printf("1.Register\n");
         printf("2.Log in\n");
@@ -67,30 +50,14 @@ int main()
         }
         else if (choice == 2)
         {
-            log_in();
-            printf("1. View Menu\n");
-            printf("2. Search food\n");
-            printf("3. View profile\n");
-            printf("Enter your choice: ");
-            scanf("%d", &choice);
-            if (choice == 1)
-            {
-                view_FoodList();
-            }
-            else if (choice == 2)
-            {
-                search_food();
-            }
-            else if (choice == 3)
-            {
-                view_profile();
-            }
+            //log_in();
+            int customerMenu();
         }
     }
 
     // Admin
 
-    else if (choice == 3) 
+    else if (choice == 3)
     {
         printf("1.Register\n");
         printf("2.Log in\n");
@@ -126,7 +93,6 @@ int main()
             {
                 view_sales_report();
             }
-
         }
     }
     else if (choice == 4)
@@ -138,7 +104,6 @@ int main()
     {
         printf("Invalid choice. Please try again.\n");
     }
-
 
     return main();
 }

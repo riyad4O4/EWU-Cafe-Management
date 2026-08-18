@@ -14,8 +14,8 @@ typedef struct
     int quantity;
 } Food;
 
-Food foods[MAX_FOOD];
-int foodCount = 0;
+static Food foods[MAX_FOOD];
+static int foodCount = 0;
 int findFoodIndex(int id)
 {
     for (int i = 0; i < foodCount; i++)
@@ -36,7 +36,7 @@ int saveToFile()
     if (fp == NULL)
     {
         printf("\n[Error] Could not save food data!\n");
-        return;
+        return 0;
     }
 
     for (int i = 0; i < foodCount; i++)
@@ -64,7 +64,7 @@ int loadFromFile()
     {
         preloadDefaultFoods();
         saveToFile();
-        return;
+        return 0;
     }
 
     foodCount = 0;
@@ -113,7 +113,7 @@ int add_Food()
     if (foodCount >= MAX_FOOD)
     {
         printf("\n[Error] Food list is full!\n");
-        return;
+        return 0;
     }
 
     printf("\n========== ADD FOOD ==========\n");
@@ -126,7 +126,7 @@ int add_Food()
     if (findFoodIndex(foods[foodCount].id) != -1)
     {
         printf("\n[Error] This Food ID already exists!\n");
-        return;
+        return 0;
     }
 
     /* Ask for new Food Name */
@@ -163,7 +163,7 @@ int edit_Food()
     if (index == -1)
     {
         printf("\n[Error] Food with ID %d not found.\n", id);
-        return;
+        return 0;
     }
 
     printf("\nCurrent Name: %s\n", foods[index].name);
@@ -194,7 +194,7 @@ int delete_Food()
     if (index == -1)
     {
         printf("\n[Error] Food with ID %d not found.\n", id);
-        return;
+        return 0;
     }
 
     for (int i = index; i < foodCount - 1; i++)
@@ -247,7 +247,7 @@ int update_Quantity()
     if (index == -1)
     {
         printf("\n[Error] Food with ID %d not found.\n", id);
-        return;
+        return 0;
     }
 
     printf("\nFood: %s\n", foods[index].name);
@@ -294,3 +294,20 @@ int search_Food()
     return 0;
 }
 
+int view_customer_list()
+{
+    printf("\n[TODO] Customer list feature not implemented yet.\n");
+    return 0;
+}
+
+int view_all_orders()
+{
+    printf("\n[TODO] Orders feature not implemented yet.\n");
+    return 0;
+}
+
+int view_sales_report()
+{
+    printf("\n[TODO] Sales report feature not implemented yet.\n");
+    return 0;
+}
