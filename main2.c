@@ -220,3 +220,86 @@ void deleteFood()
 
     printf("\nFood item deleted successfully!\n");
 }
+/* 4. VIEW FOOD LIST */
+void viewFood()
+{
+    printf("\n========== FOOD MENU ==========\n");
+
+    if (foodCount == 0)
+    {
+        printf("No food items available.\n");
+    }
+    else
+    {
+        for (int i = 0; i < foodCount; i++)
+        {
+            printf("%d. %-20s Price: %.2f  Available: %d\n",
+                   foods[i].id,
+                   foods[i].name,
+                   foods[i].price,
+                   foods[i].quantity);
+        }
+    }
+
+    printf("===============================\n");
+}
+
+
+/* 5. UPDATE QUANTITY */
+void updateQuantity()
+{
+    int id;
+
+    printf("\n========== UPDATE QUANTITY ==========\n");
+
+    printf("Enter Food ID: ");
+    scanf("%d", &id);
+
+    int index = findFoodIndex(id);
+
+    if (index == -1)
+    {
+        printf("\n[Error] Food with ID %d not found.\n", id);
+        return;
+    }
+
+    printf("\nFood: %s\n", foods[index].name);
+    printf("Current Quantity: %d\n", foods[index].quantity);
+
+    printf("Enter New Quantity: ");
+    scanf("%d", &foods[index].quantity);
+
+    saveToFile();
+
+    printf("\nQuantity updated successfully!\n");
+}
+
+
+/* 6. SEARCH FOOD */
+void searchFood()
+{
+    int id;
+
+    printf("\n========== SEARCH FOOD ==========\n");
+
+    printf("Enter Food ID to search: ");
+    scanf("%d", &id);
+
+    int index = findFoodIndex(id);
+
+    if (index == -1)
+    {
+        printf("\n[Error] Food item not found.\n");
+    }
+    else
+    {
+        printf("\n========== ITEM FOUND ==========\n");
+
+        printf("ID: %d\n", foods[index].id);
+        printf("Name: %s\n", foods[index].name);
+        printf("Price: %.2f\n", foods[index].price);
+        printf("Available: %d\n", foods[index].quantity);
+
+        printf("================================\n");
+    }
+}
