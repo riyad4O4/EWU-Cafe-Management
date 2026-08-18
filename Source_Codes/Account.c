@@ -25,7 +25,6 @@ if(fp==NULL)  //Check if the files could not be opened
 }
 printf("\n----CREATE ACCOUNT----\n");
 printf("Enter Student ID/Faculty ID");
-getchar();
 //Take input
 fgets(user.id, sizeof(user.id), stdin);
 user.id[strcspn(user.id, "\n")] = '\0'; // To remove a newline
@@ -71,7 +70,6 @@ else
     return 0;
 }
     printf("Enter Email: ");
-    getchar();  //To clear the newline from the past use of scanf
     fgets(user.email, sizeof(user.email), stdin);
     user.email[strcspn(user.email, "\n")] = '\0';
 
@@ -182,7 +180,6 @@ struct Account user;
     printf("\n~~~~~ LOGIN ~~~~~\n");
 
     printf("Student ID: ");
-    getchar();
     fgets(id, sizeof(id), stdin);
     id[strcspn(id, "\n")] = '\0';
 
@@ -259,7 +256,6 @@ int change_password()
 printf("\n CHANGE PASSWORD: \n");
 
     printf("Student ID: ");
-    getchar();
     fgets(id, sizeof(id), stdin);
     id[strcspn(id, "\n")] = '\0';
 
@@ -347,7 +343,7 @@ while(fgets(user.id, sizeof(user.id), fp) != NULL)
     }
     else
     {
-        printf("\nWrong Student ID or Password!\n");
+        printf("\nWrong ID or Password!\n");
         return 0;
     }
 }
