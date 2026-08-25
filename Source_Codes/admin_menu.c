@@ -14,8 +14,8 @@ typedef struct
     int quantity;
 } Food;
 
-Food foods[MAX_FOOD];
-int foodCount = 0;
+static Food foods[MAX_FOOD];
+static int foodCount = 0;
 int findFoodIndex(int id)
 {
     for (int i = 0; i < foodCount; i++)
@@ -294,3 +294,20 @@ int search_Food()
     return 0;
 }
 
+int view_customer_list()
+{
+    printf("\n[TODO] Customer list feature not implemented yet.\n");
+    return 0;
+}
+
+int view_all_orders()
+{
+    printf("\n[TODO] Orders feature not implemented yet.\n");
+    return 0;
+}
+
+int view_sales_report()
+{
+    printf("\n[TODO] Sales report feature not implemented yet.\n");
+    return 0;
+}
