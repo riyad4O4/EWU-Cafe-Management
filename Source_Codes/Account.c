@@ -1,6 +1,7 @@
 //ID No.: 2026-2-60-004
 #include<stdio.h>
 #include<string.h>
+#include<stdlib.h>
 #include "Account.h"
 
 struct Account
@@ -23,6 +24,9 @@ if(fp==NULL)  //Check if the files could not be opened
     printf("File Error!\n");
     return 0;
 }
+
+system("cls");
+
 printf("\n----CREATE ACCOUNT----\n");
 printf("Enter Student ID/Faculty ID");
 //Take input
@@ -115,6 +119,10 @@ int valid;  //Asking for a valid password
     fclose(fp);  //Close the file
 
     printf("Account Created Successfully! \n");
+    printf("Press Enter to continue...");
+    getchar();
+
+    system("cls");
     return 1;
 }
 int valid_password(char password[]) //Function to check the validity of password
@@ -177,6 +185,8 @@ struct Account user;
         return 0;
     }
 
+    system("cls");
+
     printf("\n~~~~~ LOGIN ~~~~~\n");
 
     printf("Student ID: ");
@@ -214,6 +224,10 @@ struct Account user;
     if(found == 1)  //Display login result
     {
         printf("\nLogin Successful!\n");
+        printf("Press Enter to continue...");
+        getchar();
+
+        system("cls");
         return 1;
     }
     else
@@ -339,6 +353,10 @@ while(fgets(user.id, sizeof(user.id), fp) != NULL)
     if(found == 1)  //Display the result
     {
         printf("\nPassword Changed Successfully!\n");
+        printf("Press Enter to continue...");
+        getchar();
+
+        system("cls");
         return 1;
     }
     else
@@ -367,6 +385,10 @@ int admin_login()  //Funtion for admin login
     if(strcmp(password, "1234") == 0)  //Checks if the given password is correct
     {
         printf("\n Admin Login Successful! \n");
+        printf("Press Enter to continue...");
+        getchar();
+
+        system("cls");
         return 1;
     }
     else
