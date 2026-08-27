@@ -1,4 +1,9 @@
+// ID: 2026-2-60-543
 #include <stdio.h>
+#include "main_menu.h"
+#include "Account.h"
+#include "admin_menu.h"
+#include "customer.h"
 #include "main_menu.h"
 int main()
 {
@@ -14,10 +19,10 @@ int main()
 
     // Faculty
 
-    if (choice == 1) 
+    if (choice == 1)
     {
         printf("1.Register\n");
-        printf("2.Log in");
+        printf("2.Log in\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
         if (choice == 1)
@@ -27,33 +32,16 @@ int main()
         else if (choice == 2)
         {
             log_in();
-            printf("1. View Menu");
-            printf("2. Search food");
-            printf("3. View profile");
-            printf("Enter your choice: ");
-            scanf("%d", &choice);
-            if (choice == 1)
-            {
-                view_FoodList();
-            }
-            else if (choice == 2)
-            {
-                search_food();
-            }
-            else if (choice == 3)
-            {
-                view_profile();
-            }
-
+            customerMenu();
         }
     }
 
     // Student
 
-    else if (choice == 2) 
+    else if (choice == 2)
     {
         printf("1.Register\n");
-        printf("2.Log in");
+        printf("2.Log in\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
         if (choice == 1)
@@ -63,32 +51,16 @@ int main()
         else if (choice == 2)
         {
             log_in();
-            printf("1. View Menu");
-            printf("2. Search food");
-            printf("3. View profile");
-            printf("Enter your choice: ");
-            scanf("%d", &choice);
-            if (choice == 1)
-            {
-                view_FoodList();
-            }
-            else if (choice == 2)
-            {
-                search_food();
-            }
-            else if (choice == 3)
-            {
-                view_profile();
-            }
+            customerMenu();
         }
     }
 
     // Admin
 
-    else if (choice == 3) 
+    else if (choice == 3)
     {
         printf("1.Register\n");
-        printf("2.Log in");
+        printf("2.Log in\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
         if (choice == 1)
@@ -97,17 +69,16 @@ int main()
         }
         else if (choice == 2)
         {
-            log_in();
-            printf("1. Edit Food");
-            printf("2. view customer list");
-            printf("3. View all orders");
-            printf("4. View sales report");
+            admin_login();
+            printf("1. Edit Food\n");
+            printf("2. view customer list\n");
+            printf("3. View all orders\n");
+            printf("4. View sales report\n");
             printf("Enter your choice: ");
             scanf("%d", &choice);
             if (choice == 1)
             {
-                edit_food();
-                
+                edit_Food();
             }
             else if (choice == 2)
             {
@@ -121,7 +92,6 @@ int main()
             {
                 view_sales_report();
             }
-
         }
     }
     else if (choice == 4)
@@ -134,7 +104,5 @@ int main()
         printf("Invalid choice. Please try again.\n");
     }
 
-
     return main();
 }
-

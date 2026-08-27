@@ -1,13 +1,13 @@
 
 #include <stdio.h>
 #include <string.h>
-#include "customer.h"                                // stident id: 2026-2-60-024
+#include "customer.h"                                // stident ID: 2026-2-60-024
 
-struct Food food[MAX_FOOD];
-struct Cart cart[MAX_CART];
+static struct Food food[MAX_FOOD];
+static struct Cart cart[MAX_CART];
 
-int foodCount = 0;
-int cartCount = 0;
+static int foodCount = 0;
+static int cartCount = 0;
 
 
 /* LOAD FOOD FROM FILE */
