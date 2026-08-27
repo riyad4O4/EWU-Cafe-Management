@@ -15,8 +15,9 @@ struct Account
 
 int create_account()
 {
-struct Account user;  //Stores new user's information
-struct Account temp;  //Temporary stores existing account information
+struct Account *user;  //Stores new user's information
+struct Account *temp;  //Temporary stores existing account information
+int valid;
 FILE *fp;
 fp=fopen("accounts.txt", "a+");  //Open accounts.txt in append and reads
 if(fp==NULL)  //Check if the files could not be opened
