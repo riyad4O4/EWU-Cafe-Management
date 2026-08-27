@@ -208,7 +208,8 @@ int loadOrdersFromFile() {
 }
 
 int add_Food()
-{
+{  system("cls");
+
     if (foodCount >= MAX_FOOD)
     {
         printf("\n[Error] Food list is full!\n");
@@ -250,7 +251,7 @@ int add_Food()
     return 0;
 }
 int edit_Food()
-{
+{   system("cls");
     int id;
 
     printf("\n========== EDIT FOOD ==========\n");
@@ -281,6 +282,7 @@ int edit_Food()
 }
 int delete_Food()
 {
+     system("cls");
     int id;
 
     printf("\n========== DELETE FOOD ==========\n");
@@ -309,7 +311,7 @@ int delete_Food()
     return 0;
 }
 int view_FoodList()
-{
+{   system("cls");
     printf("\n========== FOOD MENU ==========\n");
 
     if (foodCount == 0)
@@ -333,7 +335,8 @@ int view_FoodList()
 }
 
 int update_Quantity()
-{
+{   system("cls");
+
     int id;
 
     printf("\n========== UPDATE QUANTITY ==========\n");
@@ -365,7 +368,7 @@ int update_Quantity()
 /* 6. SEARCH FOOD */
 
 int search_Food()
-{
+{   system("cls");
     int id;
 
     printf("\n========== SEARCH FOOD ==========\n");
@@ -393,13 +396,11 @@ int search_Food()
     return 0;
 }
 
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
+
 int view_customer_list()
 {
 
-
+    system("cls");
 
     loadCustomersFromFile();
 
@@ -425,6 +426,8 @@ int view_customer_list()
 
 
     int view_all_orders() {
+     system("cls");
+
     loadOrdersFromFile();
     printf("\n=================== ALL ORDERS ===================\n");
     if (orderCount == 0) {
@@ -444,23 +447,12 @@ int view_customer_list()
     printf("==================================================\n");
     return 0;
 
-=======
-int view_customer_list()
-{
-    printf("\n[TODO] Customer list feature not implemented yet.\n");
-    return 0;
-}
 
-int view_all_orders()
-{
-    printf("\n[TODO] Orders feature not implemented yet.\n");
-    return 0;
->>>>>>> main
-}
+
 
 int view_sales_report()
 {
-<<<<<<< HEAD
+    system("cls");
 
     loadOrdersFromFile();
     printf("\n========== SALES REPORT ==========\n");
@@ -482,9 +474,6 @@ int view_sales_report()
     return 0;
 
 }
->>>>>>> Stashed changes
-=======
-    printf("\n[TODO] Sales report feature not implemented yet.\n");
-    return 0;
-}
->>>>>>> main
+
+
+
