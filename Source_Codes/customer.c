@@ -470,7 +470,7 @@ int generateBill()
     printf("============================================================\n");
     printf("              THANK YOU FOR VISITING!\n");
     printf("============================================================\n");
-
+    cartCount = 0;
     return 1;
 }
 
@@ -536,7 +536,7 @@ int customerMenu()
 
         case 7:
             generateBill();
-            break;
+            return 1;
 
         case 8:
             printf("\nThank you for visiting the cafe.\n");

@@ -22,9 +22,9 @@ int main()
     printf("*                                                *\n");
     printf("**************************************************\n");
 
-
     printf(" Choice: ");
     scanf("%d", &choice);
+    getchar();
 
     // Faculty
 
@@ -41,7 +41,7 @@ int main()
         printf("Enter your choice: ");
         scanf("%d", &choice);
         getchar();
-        
+
         if (choice == 1)
         {
             fcreate_account();
@@ -49,8 +49,8 @@ int main()
         else if (choice == 2)
         {
             int a;
-            a=flog_in();
-            if (a==1)
+            a = flog_in();
+            if (a == 1)
             {
                 customerMenu();
             }
@@ -84,8 +84,8 @@ int main()
         else if (choice == 2)
         {
             int a;
-            a=log_in();
-            if (a==1)
+            a = log_in();
+            if (a == 1)
             {
                 customerMenu();
             }
@@ -101,19 +101,12 @@ int main()
     else if (choice == 3)
     {
         printf("\n");
-        printf("**************************************************\n");
-        printf("*                                                *\n");
-        printf("*     [1]  Log in                                *\n");
-        printf("*                                                *\n");
-        printf("**************************************************\n");
 
-        printf("Enter your choice: ");
-        scanf("%d", &choice);
+        int a;
 
-    
-       if (choice == 1)
+        a = admin_login();
+        if (a == 1)
         {
-            admin_login();
 
             printf("\n");
             printf("**************************************************\n");
@@ -144,6 +137,10 @@ int main()
             {
                 view_sales_report();
             }
+        }
+        else
+        {
+            main();
         }
     }
 
