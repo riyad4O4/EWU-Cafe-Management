@@ -6,7 +6,7 @@
  struct Food food[MAX_FOOD];
 struct Cart cart[MAX_CART];
 
-int fooodCount = 0;
+int foodCount = 0;
 int cartCount = 0;
 
 
