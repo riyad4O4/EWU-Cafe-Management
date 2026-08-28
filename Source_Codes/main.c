@@ -11,6 +11,7 @@
 int main()
 {
     int choice;
+    loadFromFile();
 
     printf("\n");
     printf("**************************************************\n");
@@ -132,30 +133,37 @@ x:
             if (choice == 1)
             {
                 add_Food();
+                goto x;
             }
             else if (choice == 2)
             {
                 edit_Food();
+                goto x;
             }
             else if (choice == 3)
             {
                 delete_Food();
+                goto x;
             }
             else if (choice == 4)
             {
                 view_FoodList();
+                goto x;
             }
             else if (choice == 5)
             {
                 update_Quantity();
+                goto x;
             }
             else if (choice == 6)
             {
                 search_Food();
+                goto x;
             }
             else if (choice == 7)
             {
                 total_revenue();
+                goto x;
             }
             else if (choice == 8)
             {
@@ -192,5 +200,5 @@ x:
         printf("**************************************************\n");
     }
 
-    goto x;
+    return main();
 }
