@@ -2,7 +2,7 @@
 2,Pizza,250.00,0
 3,Pasta,180.00,10
 4,Sandwich,120.00,20
-5,Coffee,80.00,26
+5,Coffee,80.00,25
 6,FrenchFries,100.00,23
 7,Chicken,220.00,14
 8,Noodles,160.00,9
