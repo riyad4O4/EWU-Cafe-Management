@@ -6,7 +6,6 @@
 #define MAX_FOOD 100
 #define FILE_NAME "Database/food.txt"
 
-
 typedef struct
 {
     int id;
@@ -15,13 +14,17 @@ typedef struct
     int quantity;
 } Food;
 
-
-
 Food foods[MAX_FOOD];
 int foodCount = 0;
 
 /* Helper Declarations */
 int preloadDefaultFoods(void);
+int findFoodIndex(int id);
+int saveToFile(void);
+int loadFromFile(void);
+
+
+/* ================= FIND FOOD ================= */
 
 int findFoodIndex(int id)
 {
@@ -32,13 +35,16 @@ int findFoodIndex(int id)
             return i;
         }
     }
+
     return -1;
 }
 
-/* Save food data to text file */
+
+/* ================= SAVE FOOD DATA ================= */
+
 int saveToFile()
 {
-    FILE *fp = fopen(FILE_NAME, "a");
+    FILE *fp = fopen(FILE_NAME, "w");
 
     if (fp == NULL)
     {
@@ -56,10 +62,13 @@ int saveToFile()
     }
 
     fclose(fp);
+
     return 1;
 }
 
-/* Create the original default foods */
+
+/* ================= DEFAULT FOOD LIST ================= */
+
 int preloadDefaultFoods()
 {
     Food defaultItems[] =
@@ -83,39 +92,45 @@ int preloadDefaultFoods()
     {
         foods[i] = defaultItems[i];
     }
-    return 0;
+
+    return 1;
 }
 
-/* Load food data from text file */
+
+/* ================= LOAD FOOD DATA ================= */
+
 int loadFromFile()
 {
     FILE *fp = fopen(FILE_NAME, "r");
 
     if (fp == NULL)
     {
+        /* If file doesn't exist, load the 11 default foods */
         preloadDefaultFoods();
         saveToFile();
+
         return 0;
     }
 
     foodCount = 0;
 
     while (foodCount < MAX_FOOD &&
-            fscanf(fp, "%d,%49[^,],%f,%d\n",
-                   &foods[foodCount].id,
-                   foods[foodCount].name,
-                   &foods[foodCount].price,
-                   &foods[foodCount].quantity) == 4)
+           fscanf(fp, "%d,%49[^,],%f,%d",
+                  &foods[foodCount].id,
+                  foods[foodCount].name,
+                  &foods[foodCount].price,
+                  &foods[foodCount].quantity) == 4)
     {
         foodCount++;
     }
 
     fclose(fp);
+
     return 1;
 }
 
-    
-/* ================= ADMIN FUNCTIONS ================= */
+
+/* ================= ADD FOOD ================= */
 
 int add_Food()
 {
@@ -129,13 +144,20 @@ int add_Food()
 
     printf("\n========== ADD FOOD ==========\n");
 
-    printf("Enter Food ID: ");
-    scanf("%d", &foods[foodCount].id);
-
-    if (findFoodIndex(foods[foodCount].id) != -1)
+    while (1)
     {
-        printf("\n[Error] This Food ID already exists!\n");
-        return 0;
+        printf("Enter Food ID: ");
+        scanf("%d", &foods[foodCount].id);
+
+        if (findFoodIndex(foods[foodCount].id) != -1)
+        {
+            printf("\nSorry, this Food ID already exists!\n");
+            printf("Please enter a different Food ID.\n\n");
+        }
+        else
+        {
+            break;
+        }
     }
 
     printf("Enter Food Name: ");
@@ -148,18 +170,25 @@ int add_Food()
     scanf("%d", &foods[foodCount].quantity);
 
     foodCount++;
+
     saveToFile();
 
     printf("\nFood added successfully!\n");
+
     return 0;
 }
+
+
+/* ================= EDIT FOOD ================= */
 
 int edit_Food()
 {
     system("cls");
+
     int id;
 
     printf("\n========== EDIT FOOD ==========\n");
+
     printf("Enter Food ID to edit: ");
     scanf("%d", &id);
 
@@ -183,12 +212,17 @@ int edit_Food()
     saveToFile();
 
     printf("\nFood updated successfully!\n");
+
     return 0;
 }
+
+
+/* ================= DELETE FOOD ================= */
 
 int delete_Food()
 {
     system("cls");
+
     int id;
 
     printf("\n========== DELETE FOOD ==========\n");
@@ -210,15 +244,31 @@ int delete_Food()
     }
 
     foodCount--;
+
     saveToFile();
 
     printf("\nFood item deleted successfully!\n");
+
     return 0;
 }
+
+
+/* ================= VIEW FOOD LIST ================= */
 
 int view_FoodList()
 {
     system("cls");
+
+    /*
+       Load the food data when View Food List is selected.
+       If the file doesn't exist, the 11 default foods
+       will automatically be created.
+    */
+    if (foodCount == 0)
+    {
+        loadFromFile();
+    }
+
     printf("\n========== FOOD MENU ==========\n");
 
     if (foodCount == 0)
@@ -238,12 +288,17 @@ int view_FoodList()
     }
 
     printf("===============================\n");
+
     return 0;
 }
+
+
+/* ================= UPDATE QUANTITY ================= */
 
 int update_Quantity()
 {
     system("cls");
+
     int id;
 
     printf("\n========== UPDATE QUANTITY ==========\n");
@@ -268,12 +323,17 @@ int update_Quantity()
     saveToFile();
 
     printf("\nQuantity updated successfully!\n");
+
     return 0;
 }
+
+
+/* ================= SEARCH FOOD ================= */
 
 int search_Food()
 {
     system("cls");
+
     int id;
 
     printf("\n========== SEARCH FOOD ==========\n");
@@ -290,11 +350,14 @@ int search_Food()
     else
     {
         printf("\n========== ITEM FOUND ==========\n");
+
         printf("ID: %d\n", foods[index].id);
         printf("Name: %s\n", foods[index].name);
         printf("Price: %.2f\n", foods[index].price);
         printf("Available: %d\n", foods[index].quantity);
+
         printf("================================\n");
     }
+
     return 0;
 }
