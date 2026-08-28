@@ -466,16 +466,17 @@ int generateBill()
     printf("------------------------------------------------------------\n");
 
     printf("Total Amount : %.2f Tk\n", total);
+    
 
     printf("============================================================\n");
     printf("              THANK YOU FOR VISITING!\n");
     printf("============================================================\n");
 
     return 1;
-=======
+
     cartCount = 0;
     return 1; 
->>>>>>> Stashed changes
+
 }
 
 /* CUSTOMER MENU */

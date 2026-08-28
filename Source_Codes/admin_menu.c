@@ -5,10 +5,7 @@
 
 #define MAX_FOOD 100
 #define FILE_NAME "Database/food.txt"
-#define MAX_CUSTOMER 100
-#define MAX_ORDERS 100
-#define CUSTOMER_FILE "Database/customer_data.txt"
-#define ORDER_FILE "Database/order_data.txt"
+
 
 typedef struct
 {
@@ -18,24 +15,7 @@ typedef struct
     int quantity;
 } Food;
 
-typedef struct {
-    char id[50]; /* Updated to support formatted string IDs (e.g., 2026-2-60-091) */
-    char phone[30];
-} Customer;
 
-typedef struct {
-    int orderId;
-    char customerId[50]; /* Updated to match customer string ID */
-    char foodName[50];
-    int quantity;
-    float totalPrice;
-} Order;
-
-Customer customers[MAX_CUSTOMER];
-int customerCount = 0;
-
-Order orders[MAX_ORDERS];
-int orderCount = 0;
 
 Food foods[MAX_FOOD];
 int foodCount = 0;
@@ -134,30 +114,6 @@ int loadFromFile()
     return 1;
 }
 
-/* ================= CUSTOMER & ORDER HELPERS ================= */
-
-/* Reads live Customer data logged in by your teammate's code */
-int loadCustomersFromFile() {
-    FILE *fp = fopen(CUSTOMER_FILE, "r");
-    if (fp == NULL) {
-        customerCount = 0;
-        return 0;
-    }
-    customerCount = 0;
-    char line[100];
-
-    while (customerCount < MAX_CUSTOMER && fgets(line, sizeof(line), fp)) {
-        line[strcspn(line, "\r\n")] = 0;
-        if (sscanf(line, "%49[^,],%29s", customers[customerCount].id, customers[customerCount].phone) == 2) {
-            customerCount++;
-        }
-    }
-    fclose(fp);
-    return 1;
-}
-
-/* Reads live Order data generated when customers place orders */
-int loadOrdersFromFile() {
     FILE *fp = fopen(ORDER_FILE, "r");
     if (fp == NULL) {
         orderCount = 0;
@@ -365,56 +321,6 @@ int search_Food()
     return 0;
 }
 
-/* Option 7: Displays Customer ID and Phone Number */
-int view_customer_list()
-{
-    system("cls");
-    loadCustomersFromFile();
-
-    printf("\n========== CUSTOMER LIST ==========\n");
-
-    if (customerCount == 0) {
-        printf("No customers found in record.\n");
-    } else {
-        printf("%-22s %-15s\n", "Customer/Student ID", "Phone Number");
-        printf("-------------------------------------------\n");
-        for (int i = 0; i < customerCount; i++) {
-            printf("%-22s %-15s\n",
-                   customers[i].id,
-                   customers[i].phone);
-        }
-    }
-
-    printf("===========================================\n");
-    return 0;
-}
-
-/* Option 8: Displays all placed orders */
-int view_all_orders() {
-    system("cls");
-    loadOrdersFromFile();
-
-    printf("\n=================== ALL ORDERS ===================\n");
-    if (orderCount == 0) {
-        printf("No order history found.\n");
-    } else {
-        printf("%-10s %-20s %-18s %-6s %-10s\n", "Order ID", "Customer ID", "Item", "Qty", "Total Price");
-        printf("--------------------------------------------------\n");
-        for (int i = 0; i < orderCount; i++) {
-            printf("%-10d %-20s %-18s %-6d %.2f\n",
-                   orders[i].orderId,
-                   orders[i].customerId,
-                   orders[i].foodName,
-                   orders[i].quantity,
-                   orders[i].totalPrice);
-        }
-    }
-    printf("==================================================\n");
-    return 0;
-}
-
-/* Option 9: Calculates and displays total sales */
-int view_sales_report()
 {
     system("cls");
     loadOrdersFromFile();
