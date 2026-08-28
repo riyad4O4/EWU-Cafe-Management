@@ -5,34 +5,59 @@
 #include "admin_menu.h"
 #include "customer.h"
 #include "main_menu.h"
+
 int main()
 {
-
     int choice;
-    printf("Main Menu:\n");
-    printf("1. Faculty\n");
-    printf("2. Student\n");
-    printf("3. Admin\n");
-    printf("4. Exit\n");
-    printf("Enter your choice: ");
+
+    printf("\n");
+    printf("**************************************************\n");
+    printf("*                  MAIN MENU                     *\n");
+    printf("**************************************************\n");
+    printf("*                                                *\n");
+    printf("*     [1]  Faculty                               *\n");
+    printf("*     [2]  Student                               *\n");
+    printf("*     [3]  Admin                                 *\n");
+    printf("*     [4]  Exit                                  *\n");
+    printf("*                                                *\n");
+    printf("**************************************************\n");
+
+    printf(" Choice: ");
     scanf("%d", &choice);
+    getchar();
 
     // Faculty
 
     if (choice == 1)
     {
-        printf("1.Register\n");
-        printf("2.Log in\n");
+        printf("\n");
+        printf("**************************************************\n");
+        printf("*                                                *\n");
+        printf("*     [1]  Register                              *\n");
+        printf("*     [2]  Log in                                *\n");
+        printf("*                                                *\n");
+        printf("**************************************************\n");
+
         printf("Enter your choice: ");
         scanf("%d", &choice);
+        getchar();
+
         if (choice == 1)
         {
-            create_account();
+            fcreate_account();
         }
         else if (choice == 2)
         {
-            log_in();
-            customerMenu();
+            int a;
+            a = flog_in();
+            if (a == 1)
+            {
+                customerMenu();
+            }
+            else
+            {
+                main();
+            }
         }
     }
 
@@ -40,18 +65,34 @@ int main()
 
     else if (choice == 2)
     {
-        printf("1.Register\n");
-        printf("2.Log in\n");
+        printf("\n");
+        printf("**************************************************\n");
+        printf("*                                                *\n");
+        printf("*     [1]  Register                              *\n");
+        printf("*     [2]  Log in                                *\n");
+        printf("*                                                *\n");
+        printf("**************************************************\n");
+
         printf("Enter your choice: ");
         scanf("%d", &choice);
+        getchar();
+
         if (choice == 1)
         {
             create_account();
         }
         else if (choice == 2)
         {
-            log_in();
-            customerMenu();
+            int a;
+            a = log_in();
+            if (a == 1)
+            {
+                customerMenu();
+            }
+            else
+            {
+                main();
+            }
         }
     }
 
@@ -59,49 +100,95 @@ int main()
 
     else if (choice == 3)
     {
-        printf("1.Register\n");
-        printf("2.Log in\n");
-        printf("Enter your choice: ");
-        scanf("%d", &choice);
-        if (choice == 1)
+        printf("\n");
+
+        int a;
+
+        a = admin_login();
+        if (a == 1)
         {
-            create_account();
-        }
-        else if (choice == 2)
-        {
-            admin_login();
-            printf("1. Edit Food\n");
-            printf("2. view customer list\n");
-            printf("3. View all orders\n");
-            printf("4. View sales report\n");
+
+            printf("\n");
+            printf("**************************************************\n");
+            printf("*                                                *\n");
+            printf("*     [1]  Add Food                              *\n");
+            printf("*     [2]  Edit Food                             *\n");
+            printf("*     [3]  Delete Food                           *\n");
+            printf("*     [4]  View Food List                        *\n");
+            printf("*     [5]  Update Quantity                       *\n");
+            printf("*     [6]  Search Food                           *\n");
+            printf("*     [7]  View Customer List                    *\n");
+            printf("*     [8]  View All Orders                       *\n");
+            printf("*     [9]  View Sales Report                     *\n");
+            printf("*                                                *\n");
+            printf("**************************************************\n");
+
             printf("Enter your choice: ");
             scanf("%d", &choice);
+
             if (choice == 1)
             {
-                edit_Food();
+                add_Food();
             }
             else if (choice == 2)
             {
-                view_customer_list();
+                edit_Food();
             }
             else if (choice == 3)
             {
-                view_all_orders();
+                delete_Food();
             }
             else if (choice == 4)
+            {
+                view_FoodList();
+            }
+            else if (choice == 5)
+            {
+                update_Quantity();
+            }
+            else if (choice == 6)
+            {
+                search_Food();
+            }
+            else if (choice == 7)
+            {
+                view_customer_list();
+            }
+            else if (choice == 8)
+            {
+                view_all_orders();
+            }
+            else if (choice == 9)
             {
                 view_sales_report();
             }
         }
+        else
+        {
+            main();
+        }
     }
+
     else if (choice == 4)
     {
-        printf("Exiting the program.\n");
+        printf("\n");
+        printf("**************************************************\n");
+        printf("*                                                *\n");
+        printf("*            Program Exited                      *\n");
+        printf("*                                                *\n");
+        printf("**************************************************\n");
+
         return 0;
     }
+
     else
     {
-        printf("Invalid choice. Please try again.\n");
+        printf("\n");
+        printf("**************************************************\n");
+        printf("*                                                *\n");
+        printf("*       Invalid choice. Please try again.        *\n");
+        printf("*                                                *\n");
+        printf("**************************************************\n");
     }
 
     return main();

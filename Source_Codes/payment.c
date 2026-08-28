@@ -72,7 +72,7 @@ int discount(float total_bill) // takes total bill
 }
 
 
-//2026-2-60-547
+                                                    //2026-2-60-547
 
 //Doing Work on monthly sales and daily sales 
 
@@ -140,7 +140,8 @@ int daily_sales()
 
 /* Shows total sales for the CURRENT MONTH, by reading sales.txt and
    summing every line whose date's year-month matches the current month. */
-int monthly_sales()
+
+   int monthly_sales()
 {
     FILE *fp = fopen(SALES_FILE, "r");
     if (fp == NULL)
