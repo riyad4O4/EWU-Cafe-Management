@@ -25,7 +25,7 @@ int card_payment(float total_bill) // takes total bill
     int count = 0;
     while (1) // infinite loop until payments success
     {
-        printf("Total Bill %f\n", total_bill);
+        printf("Total Bill %.2f\n", total_bill);
         printf("Enter amount to pay : \n");
         scanf("%f", &amount);
 
