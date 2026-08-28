@@ -5,7 +5,11 @@ SOURCES = Source_Codes/main.c \
           Source_Codes/main_menu.c \
           Source_Codes/payment.c \
           Source_Codes/Sales.c
-make:
-	gcc -IHeader_Files $(SOURCES) -o cafe_management
+
+TARGET = cafe_management.exe
+
+all:
+	gcc -IHeader_Files $(SOURCES) -o $(TARGET)
+
 clean:
-	rm -f $(TARGET)
+	del /Q $(TARGET)
