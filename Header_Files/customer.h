@@ -1,5 +1,5 @@
 
-#ifndef CUSTOMER_H                 //STUDENT ID: 2026-2-60-024
+#ifndef CUSTOMER_H
 #define CUSTOMER_H
 
 #define MAX_FOOD 50

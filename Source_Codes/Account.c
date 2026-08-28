@@ -15,18 +15,48 @@ struct Account
 
 int create_account()
 {
-struct Account *user;  //Stores new user's information
-struct Account *temp;  //Temporary stores existing account information
-int valid;
-FILE *fp;
-fp=fopen("accounts.txt", "a+");  //Open accounts.txt in append and reads
-if(fp==NULL)  //Check if the files could not be opened
-{
-    printf("File Error!\n");
-    return 0;
-}
-printf("\n----CREATE ACCOUNT----\n");
-printf("Enter Student ID/Faculty ID");
+    struct Account *user;  //Stores new user's information
+    struct Account *temp;  //Temporary stores existing account information
+    int valid;
+
+    FILE *fp;
+
+    //Allocate Account
+    user = malloc(sizeof(struct Account));
+    temp = malloc(sizeof(struct Account));
+
+    if (user == NULL || temp == NULL)
+    {
+        printf("Memory Error!\n");
+        return 0;
+    }
+
+    //Allocate strings
+    user->id = malloc(20);
+    user->email = malloc(40);
+    user->phone = malloc(15);
+    user->password = malloc(15);
+    user->type = malloc(10);
+
+    temp->id = malloc(20);
+    temp->email = malloc(40);
+    temp->phone = malloc(15);
+    temp->password = malloc(15);
+    temp->type = malloc(10);
+
+    fp=fopen("accounts.txt", "a+");  //Open accounts.txt in append and reads
+
+    if(fp==NULL)  //Check if the files could not be opened
+    {
+        printf("\nError! Cannot be opened.\n");
+        return 0;
+    }
+
+printf("\n==================================================\n");
+printf("                 CREATE ACCOUNT\n");
+printf("==================================================\n");
+
+printf("Enter Student ID/Faculty ID: ");
 //Take input
 fgets(user->id, 20, stdin);
 user->id[strcspn(user->id, "\n")] = '\0'; // To remove a newline
@@ -125,10 +155,21 @@ printf("\nAccount Type\n");
     fclose(fp);  //Close the file
 
     printf("Account Created Successfully! \n");
-    printf("Press Enter to continue...");
-    getchar();
+    //Free memory
+    free(user->id);
+    free(user->email);
+    free(user->phone);
+    free(user->password);
+    free(user->type);
 
-    system("cls");
+    free(temp->id);
+    free(temp->email);
+    free(temp->phone);
+    free(temp->password);
+    free(temp->type);
+
+    free(user);
+    free(temp); 
     return 1;
 }
 
@@ -191,8 +232,6 @@ struct Account *user;
         return 0;
     }
 
-    system("cls");
-
     printf("\n==================================================\n");
     printf("                     LOGIN\n");
     printf("==================================================\n");
@@ -232,10 +271,6 @@ struct Account *user;
     if(found == 1)  //Display login result
     {
         printf("\nLogin Successful!\n");
-        printf("Press Enter to continue...");
-        getchar();
-
-        system("cls");
         return 1;
     }
     else
@@ -363,10 +398,6 @@ while(fgets(user->id, 20, fp) != NULL)
     if(found == 1)  //Display the result
     {
         printf("\nPassword Changed Successfully!\n");
-        printf("Press Enter to continue...");
-        getchar();
-
-        system("cls");
         return 1;
     }
     else
@@ -408,10 +439,6 @@ int admin_login()  //Funtion for admin login
     if(strcmp(password, "1234") == 0)  //Checks if the given password is correct
     {
         printf("\n Admin Login Successful! \n");
-        printf("Press Enter to continue...");
-        getchar();
-
-        system("cls");
         return 1;
     }
     else
