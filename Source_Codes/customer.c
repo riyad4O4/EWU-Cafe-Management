@@ -1,7 +1,13 @@
 
 #include <stdio.h>
 #include <string.h>
+<<<<<<< Updated upstream
 #include "customer.h"                         // STUDENT ID: 2026-2-60-024
+=======
+#include <stdlib.h>
+
+#include "customer.h" // STUDENT ID: 2026-2-60-024
+>>>>>>> Stashed changes
 
 struct Food food[MAX_FOOD];
 struct Cart cart[MAX_CART];
@@ -405,7 +411,7 @@ int removeItem()
 
 int generateBill()
 {
-    int i;
+   int i;
     float total = 0;
 
     if(cartCount == 0)
@@ -446,8 +452,13 @@ int generateBill()
     printf("============================================================\n");
     printf("              THANK YOU FOR VISITING!\n");
     printf("============================================================\n");
+<<<<<<< Updated upstream
 
     return 1;
+=======
+    cartCount = 0;
+    return 1; 
+>>>>>>> Stashed changes
 }
 
 
@@ -502,6 +513,7 @@ int customerMenu()
                 viewCart();
                 break;
 
+<<<<<<< Updated upstream
             case 6:
                 removeItem();
                 break;
@@ -513,6 +525,17 @@ int customerMenu()
             case 8:
                 printf("\nThank you for visiting the cafe.\n");
                 return 1;
+=======
+        case 6:
+            removeItem();
+            break;
+        case 7:
+             generateBill();
+            return 1;
+        case 8:
+            printf("\nThank you for visiting the cafe.\n");
+            return 1;
+>>>>>>> Stashed changes
 
             default:
                 printf("\nInvalid choice.\n");
