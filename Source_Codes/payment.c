@@ -46,7 +46,7 @@ int card_payment(float total_bill) // takes total bill
 
         if (count == 3)
         {
-            printf("Order cancelled\n");
+            printf("Card Payment cancelled\n");
             printf("Pay Via Cash\n");
             cash_payment(total_bill);
             break;
