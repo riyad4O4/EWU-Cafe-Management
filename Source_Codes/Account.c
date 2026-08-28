@@ -28,6 +28,8 @@ int create_account()
     if (user == NULL || temp == NULL)
     {
         printf("Memory Error!\n");
+        free(user);
+        free(temp);
         return 0;
     }
 
@@ -49,6 +51,20 @@ int create_account()
     if(fp==NULL)  //Check if the files could not be opened
     {
         printf("\nError! Cannot be opened.\n");
+        free(user->id);
+        free(user->email);
+        free(user->phone);
+        free(user->password);
+        free(user->type);
+
+        free(temp->id);
+        free(temp->email);
+        free(temp->phone);
+        free(temp->password);
+        free(temp->type);
+
+        free(user);
+        free(temp);
         return 0;
     }
 
@@ -75,8 +91,23 @@ while (fgets(temp->id, 20, fp) != NULL)
 
         if (strcmp(user->id, temp->id) == 0)  //Compare entered ID with registered ones
     {
-        printf("This ID already exists!\n");
+            printf("This ID already exists!\n");
             fclose(fp);  //Close the file
+
+            free(user->id);
+            free(user->email);
+            free(user->phone);
+            free(user->password);
+            free(user->type);
+
+            free(temp->id);
+            free(temp->email);
+            free(temp->phone);
+            free(temp->password);
+            free(temp->type);
+
+            free(user);
+            free(temp);
             return 0;
     }
 }
@@ -106,7 +137,7 @@ printf("\nAccount Type\n");
     else
     {
         printf("\nInvalid account type.\n");
-
+        free(choice);
         fclose(fp);
         return 0;
     }
@@ -216,69 +247,101 @@ int valid_password(char password[]) //Function to check the validity of password
 
 int log_in()  //Function for user login
 {
-struct Account *user;
-    char *id;
-    char *password;
+struct Account *user = malloc(sizeof(struct Account));
 
-    int found = 0;  //Checks whether login information is correct
+char *id = malloc(20);
+char *password = malloc(15);
 
-    FILE *fp;
+int found = 0;
+FILE *fp;
 
-    fp = fopen("accounts.txt", "r");  //Open and reads accounts file
+if (user == NULL || id == NULL || password == NULL)
+{
+    printf("Memory allocation failed!\n");
+    return 0;
+}
 
-    if(fp == NULL)  //Checks if the file exists
+user->id = malloc(20);
+user->email = malloc(40);
+user->phone = malloc(15);
+user->password = malloc(15);
+user->type = malloc(10);
+
+if (user->id == NULL || user->email == NULL ||
+    user->phone == NULL || user->password == NULL ||
+    user->type == NULL)
+{
+    printf("Memory allocation failed!\n");
+    return 0;
+}
+
+fp = fopen("accounts.txt", "r");
+
+if (fp == NULL)
+{
+    printf("No Account Found!\n");
+    return 0;
+}
+
+printf("\n==================================================\n");
+printf("                     LOGIN\n");
+printf("==================================================\n");
+
+printf("Student/Faculty ID: ");
+fgets(id, 20, stdin);
+id[strcspn(id, "\n")] = '\0';
+
+printf("Password: ");
+fgets(password, 15, stdin);
+password[strcspn(password, "\n")] = '\0';
+
+while (fgets(user->id, 20, fp) != NULL)
+{
+    fgets(user->email, 40, fp);
+    fgets(user->phone, 15, fp);
+    fgets(user->password, 15, fp);
+    fgets(user->type, 10, fp);
+
+    user->id[strcspn(user->id, "\n")] = '\0';
+    user->email[strcspn(user->email, "\n")] = '\0';
+    user->phone[strcspn(user->phone, "\n")] = '\0';
+    user->password[strcspn(user->password, "\n")] = '\0';
+    user->type[strcspn(user->type, "\n")] = '\0';
+
+    if (strcmp(id, user->id) == 0 &&
+        strcmp(password, user->password) == 0)
     {
-        printf("No Account Found!\n");
-        return 0;
-    }
-
-    printf("\n==================================================\n");
-    printf("                     LOGIN\n");
-    printf("==================================================\n");
-
-    printf("Student/Faculty ID: ");
-    fgets(id, 20, stdin);
-    id[strcspn(id, "\n")] = '\0';
-
-    printf("Password: ");
-    fgets(password, 15, stdin);
-    password[strcspn(password, "\n")] = '\0';
-
-    while(fgets(user->id, 20, fp) != NULL)
-    {
-        fgets(user->email, 40, fp);
-        fgets(user->phone, 15, fp);
-        fgets(user->password, 15, fp);
-        fgets(user->type, 10, fp); //Reads each and every from the accounts file
-
-       //To remove newline
-        user->id[strcspn(user->id, "\n")] = '\0';
-        user->email[strcspn(user->email, "\n")] = '\0';
-        user->phone[strcspn(user->phone, "\n")] = '\0';
-        user->password[strcspn(user->password, "\n")] = '\0';
-        user->type[strcspn(user->type, "\n")] = '\0';
-    
-        if(strcmp(id, user->id) == 0 &&
-           strcmp(password, user->password) == 0)  //Compares entered ID and password with stored infos
-        {
-            found = 1;  //Login info is correct
-            break;  //Stop searching
-        }
-    }
-
-    fclose(fp);
-
-    if(found == 1)  //Display login result
-    {
-        printf("\nLogin Successful!\n");
-        return 1;
-    }
-    else
-    {
-        printf("\nWrong Student ID or Password!\n");
-        return 0;
+        found = 1;
+        break;
     }
 }
+
+fclose(fp);
+
+if (found == 1)
+{
+    printf("\nLogin Successful!\n");
+}
+else
+{
+    printf("\nWrong Student ID or Password!\n");
+}
+
+/* Free memory */
+free(id);
+free(password);
+
+free(user->id);
+free(user->email);
+free(user->phone);
+free(user->password);
+free(user->type);
+
+free(user);
+
+return found;
+}
+
 //Function to change user's password
 int change_password()
 {
@@ -293,6 +356,40 @@ int change_password()
 
     FILE *fp;
     FILE *temp;
+
+    // Allocate memory
+    user = malloc(sizeof(struct Account));
+
+    id = malloc(20);
+    oldpass = malloc(15);
+    newpass = malloc(15);
+
+    if(user == NULL || id == NULL || oldpass == NULL || newpass == NULL)
+{
+    printf("Memory allocation failed!\n");
+
+    free(user);
+    free(id);
+    free(oldpass);
+    free(newpass);
+
+    return 0;
+}
+
+    user->id = malloc(20);
+    user->email = malloc(40);
+    user->phone = malloc(15);
+    user->password = malloc(15);
+    user->type = malloc(10);
+
+    // Check memory allocation
+    if(user == NULL || id == NULL || oldpass == NULL || newpass == NULL ||
+       user->id == NULL || user->email == NULL || user->phone == NULL ||
+       user->password == NULL || user->type == NULL)
+    {
+        printf("Memory allocation failed!\n");
+        return 0;
+    }
 
     fp = fopen("accounts.txt", "r");  //Open the original account file
 
@@ -398,24 +495,24 @@ while(fgets(user->id, 20, fp) != NULL)
     if(found == 1)  //Display the result
     {
         printf("\nPassword Changed Successfully!\n");
-        return 1;
     }
     else
     {
         printf("\nWrong ID or Password!\n");
-    free(id);
-    free(oldpass);
-    free(newpass);
-
-    free(user->id);
-    free(user->email);
-    free(user->phone);
-    free(user->password);
-    free(user->type);
-
-    free(user);
-        return 0;
     }
+        free(id);
+        free(oldpass);
+        free(newpass);
+
+        free(user->id);
+        free(user->email);
+        free(user->phone);
+        free(user->password);
+        free(user->type);
+
+        free(user);
+        return found;
+    
 }
 
 int log_out()  //Function to log out
@@ -439,15 +536,15 @@ int admin_login()  //Funtion for admin login
     if(strcmp(password, "1234") == 0)  //Checks if the given password is correct
     {
         printf("\n Admin Login Successful! \n");
+        free(password);
         return 1;
     }
     else
     {
         printf("\n Wrong Password! \n");
-    }
         free(password);
         return 0;
     
+    }
+        
 }
-
-//Paste
