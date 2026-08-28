@@ -6,7 +6,7 @@
 #include <string.h>
 
 #define MAX_FOOD 100
-#define FILE_NAME "food_data.txt"
+#define FILE_NAME "Database/food.txt"
 #define MAX_CUSTOMER 100
 #define MAX_ORDERS 100
 #define CUSTOMER_FILE "customer_data.txt"
@@ -55,7 +55,7 @@ int findFoodIndex(int id)
 /* Save data to text file */
 int saveToFile()
 {
-    FILE *fp = fopen(Database/FILE_NAME, "w");
+    FILE *fp = fopen(FILE_NAME, "w");
 
     if (fp == NULL)
     {
