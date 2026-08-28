@@ -1,20 +1,23 @@
+//ID No.: 2026-2-60-004
 #include<stdio.h>
 #include<string.h>
+#include<stdlib.h>
 #include "Account.h"
 
 struct Account
 {
-    char id[20];
-    char email[40];
-    char phone[15];  
-    char password[15];
-    char type[10];
+    char *id;
+    char *email;
+    char *phone;  
+    char *password;
+    char *type;
 };
 
 int create_account()
 {
-struct Account user;  //Stores new user's information
-struct Account temp;  //Temporary stores existing account information
+struct Account *user;  //Stores new user's information
+struct Account *temp;  //Temporary stores existing account information
+int valid;
 FILE *fp;
 fp=fopen("accounts.txt", "a+");  //Open accounts.txt in append and reads
 if(fp==NULL)  //Check if the files could not be opened
@@ -24,13 +27,23 @@ if(fp==NULL)  //Check if the files could not be opened
 }
 printf("\n----CREATE ACCOUNT----\n");
 printf("Enter Student ID/Faculty ID");
-getchar();
 //Take input
-fgets(user.id, sizeof(user.id), stdin);
+fgets(user->id, 20, stdin);
+user->id[strcspn(user->id, "\n")] = '\0'; // To remove a newline
+
 rewind(fp); //Check if ID already registered
-while(fscanf(fp, "%s %s %s %s %s", temp.id, temp.email, temp.phone, temp.password, temp.type)!= EOF) //Read registered accounts from the file
+
+//Reads the registered accounts from the file
+while (fgets(temp->id, 20, fp) != NULL)
 {
-    if(strcmp(user.id, temp.id)== 0)  //Compare entered ID with registered ones
+        fgets(temp->email, 40, fp);
+        fgets(temp->phone, 15, fp);
+        fgets(temp->password, 15, fp);
+        fgets(temp->type, 10, fp);
+
+        temp->id[strcspn(temp->id, "\n")] = '\0';
+
+        if (strcmp(user->id, temp->id) == 0)  //Compare entered ID with registered ones
     {
         printf("This ID already exists!\n");
             fclose(fp);  //Close the file
@@ -38,43 +51,58 @@ while(fscanf(fp, "%s %s %s %s %s", temp.id, temp.email, temp.phone, temp.passwor
     }
 }
 
-printf("\n 1. Student\n");
-printf("2. Faculty\n");
+//Select account type
+printf("\nAccount Type\n");
+    printf("------------\n");
+    printf("  1. Student\n");
+    printf("  2. Faculty\n");
 
-int choice;
+    char *choice;
+    choice = malloc(3);
 
-printf("Enter Account Type: ");
-scanf("%d", &choice);
+    printf("Enter choice: ");
+    fgets(choice, 3, stdin);
 
-if(choice == 1)
-{
-    strcpy(user.type, "student");
-}
-else if(choice == 2)
-{
-    strcpy(user.type, "faculty");
-}
-else
-{
-    printf("Account Type Invalid! Please Try Again!");
-    fclose(fp);
-    return 0;
-}
+    if (choice[0] == '1')
+    {
+        strcpy(user->type, "student");
+    }
+        
+    else if (choice[0] == '2')
+    {
+        strcpy(user->type, "faculty");
+    }
+        
+    else
+    {
+        printf("\nInvalid account type.\n");
+
+        fclose(fp);
+        return 0;
+    }
+
     printf("Enter Email: ");
-    getchar();
-    fgets(user.email, sizeof(user.email), stdin);
+    fgets(user->email, 40, stdin);
+    user->email[strcspn(user->email, "\n")] = '\0';
 
-    printf("Enter Phone Number: ");
-    fgets(user.phone, sizeof(user.phone), stdin);
+    printf("Enter Phone: ");
+    fgets(user->phone, 15, stdin);
+    user->phone[strcspn(user->phone, "\n")] = '\0';
 
-int valid;  //Asking for a valid password
+    printf("Password Requirements:\n");  //Showing password requirements while asking the user to create a valid password
+    printf("~ At least 8 characters\n");
+    printf("~ One uppercase letter\n");
+    printf("~ One lowercase letter\n");
+    printf("~ One number\n");
+    printf("~ One special character\n\n");
 
     do
     {
         printf("Create Password: ");
-        scanf("%s", user.password);
+        fgets(user->password, 15, stdin);
+        user->password[strcspn(user->password, "\n")] = '\0';
 
-        valid = valid_password(user.password);
+        valid = valid_password(user->password);
 
         if(valid == 0)  //If password is invalid, show the imposed requirements
         {
@@ -88,18 +116,22 @@ int valid;  //Asking for a valid password
 
     } while(valid == 0);
 
-    fprintf(fp, "%s %s %s %s %s\n",
-            user.id,
-            user.email,
-            user.phone,
-            user.password,
-            user.type);  //Save new account's information into the file
+    fprintf(fp, "%s\n", user->id);
+    fprintf(fp, "%s\n", user->email);
+    fprintf(fp, "%s\n", user->phone);
+    fprintf(fp, "%s\n", user->password);
+    fprintf(fp, "%s\n", user->type); //Save new account's information into the file
 
     fclose(fp);  //Close the file
 
-    printf("\n Account Created Successfully! \n");
+    printf("Account Created Successfully! \n");
+    printf("Press Enter to continue...");
+    getchar();
+
+    system("cls");
     return 1;
 }
+
 int valid_password(char password[]) //Function to check the validity of password
 {
     //Flags to check imposed reqirements for password
@@ -143,10 +175,9 @@ int valid_password(char password[]) //Function to check the validity of password
 
 int log_in()  //Function for user login
 {
-struct Account user;
-
-    char id[20];
-    char password[15];
+struct Account *user;
+    char *id;
+    char *password;
 
     int found = 0;  //Checks whether login information is correct
 
@@ -160,23 +191,36 @@ struct Account user;
         return 0;
     }
 
-    printf("\n~~~~~ LOGIN ~~~~~\n");
+    system("cls");
 
-    printf("Student ID: ");
-    fgets(id, sizeof(id), stdin);
+    printf("\n==================================================\n");
+    printf("                     LOGIN\n");
+    printf("==================================================\n");
+
+    printf("Student/Faculty ID: ");
+    fgets(id, 20, stdin);
+    id[strcspn(id, "\n")] = '\0';
 
     printf("Password: ");
-    fgets(password, sizeof(password), stdin);
+    fgets(password, 15, stdin);
+    password[strcspn(password, "\n")] = '\0';
 
-    while(fscanf(fp, "%s %s %s %s %s\n",
-                 user.id,
-                 user.email,
-                 user.phone,
-                 user.password,
-                 user.type) != EOF) //Reads each and every from the accounts file
+    while(fgets(user->id, 20, fp) != NULL)
     {
-        if(strcmp(id, user.id) == 0 &&
-           strcmp(password, user.password) == 0)  //Compares entered ID and password with stored infos
+        fgets(user->email, 40, fp);
+        fgets(user->phone, 15, fp);
+        fgets(user->password, 15, fp);
+        fgets(user->type, 10, fp); //Reads each and every from the accounts file
+
+       //To remove newline
+        user->id[strcspn(user->id, "\n")] = '\0';
+        user->email[strcspn(user->email, "\n")] = '\0';
+        user->phone[strcspn(user->phone, "\n")] = '\0';
+        user->password[strcspn(user->password, "\n")] = '\0';
+        user->type[strcspn(user->type, "\n")] = '\0';
+    
+        if(strcmp(id, user->id) == 0 &&
+           strcmp(password, user->password) == 0)  //Compares entered ID and password with stored infos
         {
             found = 1;  //Login info is correct
             break;  //Stop searching
@@ -188,6 +232,10 @@ struct Account user;
     if(found == 1)  //Display login result
     {
         printf("\nLogin Successful!\n");
+        printf("Press Enter to continue...");
+        getchar();
+
+        system("cls");
         return 1;
     }
     else
@@ -199,11 +247,11 @@ struct Account user;
 //Function to change user's password
 int change_password()
 {
-    struct Account user;
+    struct Account *user;
 
-    char id[20];
-    char oldpass[15];
-    char newpass[15];
+    char *id;
+    char *oldpass;
+    char *newpass;
 
     int found = 0;  //Checks whecther the accound was found
     int valid;
@@ -227,19 +275,31 @@ int change_password()
         fclose(fp);
         return 0;
 }
-printf("\n CHANGE PASSWORD: \n");
+printf("\n==================================================\n");
+printf("                 CHANGE PASSWORD\n");
+printf("==================================================\n");
 
-    printf("Student ID: ");
-    fgets(id, sizeof(id), stdin);
+    printf("Student/Faculty ID: ");
+    fgets(id, 20, stdin);
+    id[strcspn(id, "\n")] = '\0';
 
     printf("Old Password: ");
-    fgets(oldpass, sizeof(oldpass), stdin);
+    fgets(oldpass, 15, stdin);
+    oldpass[strcspn(oldpass, "\n")] = '\0';
+
+    //Showing the requirements for a valid password
+        printf("Password must contain:- At least 8 characters\n");
+        printf("~ One uppercase letter\n");
+        printf("~ One lowercase letter\n");
+        printf("~ One number\n");
+        printf("~ One special character\n\n");
 
 //Keep asking for a new password until it is valid
     do
     {
         printf("New Password: ");
-        fgets(newpass, sizeof(newpass), stdin);
+        fgets(newpass, 15, stdin);
+        newpass[strcspn(newpass, "\n")] = '\0';
 
         if(strcmp(oldpass, newpass) == 0) //New password and old password cannot be same
         {
@@ -259,33 +319,37 @@ printf("\n CHANGE PASSWORD: \n");
 
     } 
     while(valid == 0);
-while(fscanf(fp, "%s %s %s %s %s\n",
-                 user.id,
-                 user.email,
-                 user.phone,
-                 user.password,
-                 user.type) != EOF)  //Reads all account from the original file
+while(fgets(user->id, 20, fp) != NULL)
     {
-        if(strcmp(id, user.id) == 0 &&
-           strcmp(oldpass, user.password) == 0)  //Checks whether it's the same account who's password should be changed
+        fgets(user->email, 40, fp);
+        fgets(user->phone, 15, fp);
+        fgets(user->password, 15, fp);
+        fgets(user->type, 10, fp);  //Reads all account from the original file
+
+        user->id[strcspn(user->id, "\n")] = '\0';
+        user->email[strcspn(user->email, "\n")] = '\0';
+        user->phone[strcspn(user->phone, "\n")] = '\0';
+        user->password[strcspn(user->password, "\n")] = '\0';
+        user->type[strcspn(user->type, "\n")] = '\0';
+    
+        if(strcmp(id, user->id) == 0 &&
+           strcmp(oldpass, user->password) == 0)  //Checks whether it's the same account who's password should be changed
         {
-            fprintf(temp, "%s %s %s %s %s\n",
-                    user.id,
-                    user.email,
-                    user.phone,
-                    newpass,
-                    user.type);  //Register the account with new password
+            fprintf(temp, "%s\n", user->id);
+            fprintf(temp, "%s\n", user->email);
+            fprintf(temp, "%s\n", user->phone);
+            fprintf(temp, "%s\n", newpass);
+            fprintf(temp, "%s\n", user->type); //Register the account with new password
 
             found = 1;
         }
         else
         {
-            fprintf(temp, "%s %s %s %s %s\n",
-                    user.id,
-                    user.email,
-                    user.phone,
-                    user.password,
-                    user.type);  //Copy other accounts without changing them
+            fprintf(temp, "%s\n", user->id);
+            fprintf(temp, "%s\n", user->email);
+            fprintf(temp, "%s\n", user->phone);
+            fprintf(temp, "%s\n", user->password);
+            fprintf(temp, "%s\n", user->type);  //Copy other accounts without changing them
         }
     }
 
@@ -299,11 +363,26 @@ while(fscanf(fp, "%s %s %s %s %s\n",
     if(found == 1)  //Display the result
     {
         printf("\nPassword Changed Successfully!\n");
+        printf("Press Enter to continue...");
+        getchar();
+
+        system("cls");
         return 1;
     }
     else
     {
-        printf("\nWrong Student ID or Password!\n");
+        printf("\nWrong ID or Password!\n");
+    free(id);
+    free(oldpass);
+    free(newpass);
+
+    free(user->id);
+    free(user->email);
+    free(user->phone);
+    free(user->password);
+    free(user->type);
+
+    free(user);
         return 0;
     }
 }
@@ -316,21 +395,30 @@ return 1;
 
 int admin_login()  //Funtion for admin login
 {
-    char password[15];
-    printf("\n ADMIN LOGIN \n");
+    char *password;
+    password = malloc(15);
+    printf("\n==================================================\n");
+    printf("                   ADMIN LOGIN\n");
+    printf("==================================================\n");
 
     printf("Password: ");
-    getchar();
-    fgets(password, sizeof(password), stdin);
+    fgets(password, 15, stdin);
+    password[strcspn(password, "\n")] = '\0';
     
     if(strcmp(password, "1234") == 0)  //Checks if the given password is correct
     {
         printf("\n Admin Login Successful! \n");
+        printf("Press Enter to continue...");
+        getchar();
+
+        system("cls");
         return 1;
     }
     else
     {
         printf("\n Wrong Password! \n");
-        return 0;
     }
+        free(password);
+        return 0;
+    
 }
