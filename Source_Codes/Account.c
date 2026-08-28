@@ -549,6 +549,7 @@ int flog_in()  // Function for faculty user login
         getchar();
 
         system("cls");
+        return 1;
     }
     else
     {
