@@ -1,9 +1,9 @@
 
 #include <stdio.h>
 #include <string.h>
-#include "customer.h"                                // stident ID: 2026-2-60-024
+#include "customer.h"                         // STUDENT ID: 2026-2-60-024
 
- struct Food food[MAX_FOOD];
+struct Food food[MAX_FOOD];
 struct Cart cart[MAX_CART];
 
 int foodCount = 0;
@@ -14,9 +14,9 @@ int cartCount = 0;
 
 int loadFood()
 {
-    FILE *file;  // load food from file using file pointer
+    FILE *file;
 
-    file = fopen("food.txt", "r");
+    file = fopen("food_data.txt", "r");
 
     if(file == NULL)
     {
@@ -26,7 +26,7 @@ int loadFood()
 
     foodCount = 0;
 
-    while(fscanf(file, "%d %s %f %d", // fscanf reads formatted input from the file and stores it in the food array
+    while(fscanf(file, "%d,%29[^,],%f,%d",
                  &food[foodCount].id,
                  food[foodCount].name,
                  &food[foodCount].price,
@@ -40,20 +40,20 @@ int loadFood()
         }
     }
 
-    fclose(file); // fclose closes the file after reading
+    fclose(file);
 
     return 1;
 }
 
 
-/*  SAVE FOOD TO FILE  */
+/* SAVE FOOD TO FILE */
 
 int saveFood()
 {
     FILE *file;
     int i;
 
-    file = fopen("food.txt", "w");
+    file = fopen("food_data.txt", "w");
 
     if(file == NULL)
     {
@@ -63,7 +63,7 @@ int saveFood()
 
     for(i = 0; i < foodCount; i++)
     {
-        fprintf(file, "%d %s %.2f %d\n",
+        fprintf(file, "%d,%s,%.2f,%d\n",
                 food[i].id,
                 food[i].name,
                 food[i].price,
@@ -76,7 +76,7 @@ int saveFood()
 }
 
 
-/*  VIEW MENU  */
+/* VIEW MENU */
 
 int viewMenu()
 {
@@ -112,7 +112,7 @@ int viewMenu()
 }
 
 
-/*  SEARCH FOOD  */
+/* SEARCH FOOD */
 
 int searchFood()
 {
@@ -151,7 +151,7 @@ int searchFood()
 }
 
 
-/* SELECT FOOD  */
+/* SELECT FOOD */
 
 int selectFood()
 {
@@ -246,7 +246,7 @@ int selectFood()
 }
 
 
-/* ADD MORE FOOD  */
+/* ADD MORE FOOD */
 
 int addToCart()
 {
@@ -286,7 +286,7 @@ int addToCart()
 }
 
 
-/*  VIEW CART  */
+/* VIEW CART */
 
 int viewCart()
 {
@@ -330,7 +330,7 @@ int viewCart()
 }
 
 
-/*  REMOVE ITEM  */
+/* REMOVE ITEM */
 
 int removeItem()
 {
@@ -401,7 +401,7 @@ int removeItem()
 }
 
 
-/*  GENERATE BILL  */
+/* GENERATE BILL */
 
 int generateBill()
 {
@@ -451,11 +451,11 @@ int generateBill()
 }
 
 
-/*  CUSTOMER MENU  */
+/* CUSTOMER MENU */
 
 int customerMenu()
 {
-        int choice;
+    int choice;
 
     loadFood();
 
