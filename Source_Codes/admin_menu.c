@@ -54,7 +54,7 @@ int findFoodIndex(int id)
 /* Save data to text file */
 int saveToFile()
 {
-    FILE *fp = fopen(FILE_NAME, "w");
+    FILE *fp = fopen(Database/FILE_NAME, "w");
 
     if (fp == NULL)
     {
