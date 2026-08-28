@@ -38,7 +38,8 @@ int main()
 
         printf("Enter your choice: ");
         scanf("%d", &choice);
-
+        getchar();
+        
         if (choice == 1)
         {
             create_account();
