@@ -44,12 +44,12 @@ int main()
         
         if (choice == 1)
         {
-            create_account();
+            fcreate_account();
         }
         else if (choice == 2)
         {
             int a;
-            a=log_in();
+            a=flog_in();
             if (a==1)
             {
                 customerMenu();
