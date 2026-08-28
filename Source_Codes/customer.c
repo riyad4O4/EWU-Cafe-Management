@@ -1,6 +1,6 @@
-
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "customer.h" // STUDENT ID: 2026-2-60-024
 
 static struct Food food[MAX_FOOD];
@@ -13,7 +13,7 @@ static int cartCount = 0;
 
 int loadFood()
 {
-    FILE *file; // load food from file using file pointer
+    FILE *file;
 
     file = fopen("Database/food.txt", "r");
 
@@ -39,7 +39,7 @@ int loadFood()
         }
     }
 
-    fclose(file); // fclose closes the file after reading
+    fclose(file);
 
     return 1;
 }
@@ -163,6 +163,7 @@ int selectFood()
     {
         while (getchar() != '\n')
             ;
+
         printf("\nInvalid input.\n");
         return 0;
     }
@@ -200,6 +201,7 @@ int selectFood()
     {
         while (getchar() != '\n')
             ;
+
         printf("\nInvalid input.\n");
         return 0;
     }
@@ -217,6 +219,7 @@ int selectFood()
 
         return 0;
     }
+
     if (cartCount >= MAX_CART)
     {
         printf("\nSorry! Your cart is full.\n");
@@ -287,6 +290,7 @@ int addToCart()
         {
             while (getchar() != '\n')
                 ;
+
             printf("\nInvalid input.\n");
             continue;
         }
@@ -373,6 +377,7 @@ int removeItem()
     {
         while (getchar() != '\n')
             ;
+
         printf("\nInvalid input.\n");
         return 0;
     }
@@ -426,7 +431,7 @@ int removeItem()
     return 1;
 }
 
-/* GENERATE BILL */
+/* OLD GENERATE BILL FUNCTION */
 
 int generateBill()
 {
@@ -467,11 +472,92 @@ int generateBill()
     printf("------------------------------------------------------------\n");
 
     printf("Total Amount : %.2f Tk\n", total);
+    
 
     printf("============================================================\n");
     printf("              THANK YOU FOR VISITING!\n");
     printf("============================================================\n");
+
     cartCount = 0;
+
+    return 1;
+}
+
+/* GENERATE BILL IN NEW WINDOW */
+
+int showBillInNewWindow()
+{
+    int i;
+    float total = 0;
+    FILE *file;
+
+    if (cartCount == 0)
+    {
+        printf("\nYour cart is empty.\n");
+        return 0;
+    }
+
+    /*
+       Create a temporary bill file.
+    */
+
+    file = fopen("Database/bill.txt", "w");
+
+    if (file == NULL)
+    {
+        printf("\nCould not create bill file.\n");
+        return 0;
+    }
+
+    fprintf(file, "============================================================\n");
+    fprintf(file, "                    WELCOME TO THE CAFE\n");
+    fprintf(file, "                         FINAL BILL\n");
+    fprintf(file, "============================================================\n\n");
+
+    fprintf(file, "ID\tFood\t\tQty\tPrice\tSubtotal\n");
+
+    fprintf(file, "------------------------------------------------------------\n");
+
+    for (i = 0; i < cartCount; i++)
+    {
+        fprintf(file, "%d\t%-12s\t%d\t%.2f\t%.2f\n",
+                cart[i].id,
+                cart[i].name,
+                cart[i].quantity,
+                cart[i].price,
+                cart[i].subtotal);
+
+        total = total + cart[i].subtotal;
+    }
+
+    fprintf(file, "------------------------------------------------------------\n");
+
+    fprintf(file, "\nTotal Amount : %.2f Tk\n", total);
+
+    fprintf(file, "\n============================================================\n");
+    fprintf(file, "              THANK YOU FOR VISITING!\n");
+    fprintf(file, "============================================================\n");
+
+    fclose(file);
+
+    /*
+       Open a new Windows terminal window.
+    */
+
+    system("start \"EWU Cafe - Final Bill\" /wait cmd /c \"type Database\\bill.txt & echo. & echo Press any key to continue... & pause >nul\"");
+
+    /*
+       Delete temporary bill file.
+    */
+
+    remove("Database/bill.txt");
+
+    /*
+       Empty the cart after billing.
+    */
+
+    cartCount = 0;
+
     return 1;
 }
 
@@ -502,13 +588,16 @@ int customerMenu()
         printf("============================================\n");
 
         printf("Enter your choice: ");
+
         if (scanf("%d", &choice) != 1)
         {
             while (getchar() != '\n')
-                ; // bad input buffer clear করে
+                ;
+
             printf("\nInvalid input. Please enter a number.\n");
             continue;
         }
+
         switch (choice)
         {
         case 1:
@@ -545,6 +634,8 @@ int customerMenu()
             system("cls");
             generateBill();
             return 1;
+            showBillInNewWindow();
+            break;
 
         case 8:
             system("cls");

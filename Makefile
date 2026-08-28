@@ -6,3 +6,5 @@ SOURCES = Source_Codes/main.c \
           Source_Codes/payment.c
 make:
 	gcc -IHeader_Files $(SOURCES) -o cafe_management
+clean:
+	rm -f $(TARGET)
