@@ -1,3 +1,0 @@
-1,101,Chicken Burger,2,500.00
-2,102,Beef Pizza,1,500.00
-3,103,Lemonade,2,200.00

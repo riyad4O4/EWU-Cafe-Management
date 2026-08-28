@@ -114,29 +114,7 @@ int loadFromFile()
     return 1;
 }
 
-    FILE *fp = fopen(ORDER_FILE, "r");
-    if (fp == NULL) {
-        orderCount = 0;
-        return 0;
-    }
-    orderCount = 0;
-    char line[150];
-
-    while (orderCount < MAX_ORDERS && fgets(line, sizeof(line), fp)) {
-        line[strcspn(line, "\r\n")] = 0;
-        if (sscanf(line, "%d,%49[^,],%49[^,],%d,%f",
-                   &orders[orderCount].orderId,
-                   orders[orderCount].customerId,
-                   orders[orderCount].foodName,
-                   &orders[orderCount].quantity,
-                   &orders[orderCount].totalPrice) == 5) {
-            orderCount++;
-        }
-    }
-    fclose(fp);
-    return 1;
-}
-
+    
 /* ================= ADMIN FUNCTIONS ================= */
 
 int add_Food()
@@ -318,28 +296,5 @@ int search_Food()
         printf("Available: %d\n", foods[index].quantity);
         printf("================================\n");
     }
-    return 0;
-}
-
-{
-    system("cls");
-    loadOrdersFromFile();
-
-    printf("\n========== SALES REPORT ==========\n");
-    if (orderCount == 0) {
-        printf("No sales data available.\n");
-        printf("==================================\n");
-        return 0;
-    }
-    int totalItemsSold = 0;
-    float totalRevenue = 0.0f;
-    for (int i = 0; i < orderCount; i++) {
-        totalItemsSold += orders[i].quantity;
-        totalRevenue += orders[i].totalPrice;
-    }
-    printf("Total Orders Processed : %d\n", orderCount);
-    printf("Total Food Items Sold  : %d\n", totalItemsSold);
-    printf("Total Revenue Generated: BDT %.2f\n", totalRevenue);
-    printf("==================================\n");
     return 0;
 }
