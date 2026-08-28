@@ -26,8 +26,13 @@ int main()
 
     if (choice == 1)
     {
-        printf("1.Register\n");
-        printf("2.Log in\n");
+        printf("\n");
+        printf("**\n");
+        printf("                                                \n");
+        printf("     [1]  Register                              \n");
+        printf("     [2]  Log in                                \n");
+        printf("**\n");
+
         printf("Enter your choice: ");
         scanf("%d", &choice);
         if (choice == 1)
@@ -45,9 +50,13 @@ int main()
 
     else if (choice == 2)
     {
-        printf("1.Register\n");
-        printf("2.Log in\n");
-        printf("Enter your choice: ");
+        printf("\n");
+        printf("**\n");
+        printf("                                                \n");
+        printf("     [1]  Register                              \n");
+        printf("     [2]  Log in                                \n");
+        printf("**\n");
+
         scanf("%d", &choice);
         if (choice == 1)
         {
@@ -64,8 +73,12 @@ int main()
 
     else if (choice == 3)
     {
-        printf("1.Register\n");
-        printf("2.Log in\n");
+        printf("\n");
+        printf("**\n");
+        printf("                                                \n");
+        printf("     [1]  Register                              \n");
+        printf("     [2]  Log in                                \n");
+        printf("**\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
         if (choice == 1)
@@ -75,10 +88,15 @@ int main()
         else if (choice == 2)
         {
             admin_login();
-            printf("1. Edit Food\n");
-            printf("2. view customer list\n");
-            printf("3. View all orders\n");
-            printf("4. View sales report\n");
+            printf("**\n");
+            printf("                                                \n");
+            printf("     [1]  Edit Food                             \n");
+            printf("     [2]  View Customer List                    \n");
+            printf("     [3]  View All Orders                       \n");
+            printf("     [4]  View Sales Report                     \n");
+            printf("                                                *\n");
+            printf("**\n");
+
             printf("Enter your choice: ");
             scanf("%d", &choice);
             if (choice == 1)
