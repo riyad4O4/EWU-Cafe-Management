@@ -117,9 +117,6 @@ int main()
             printf("*     [4]  View Food List                        *\n");
             printf("*     [5]  Update Quantity                       *\n");
             printf("*     [6]  Search Food                           *\n");
-            printf("*     [7]  View Customer List                    *\n");
-            printf("*     [8]  View All Orders                       *\n");
-            printf("*     [9]  View Sales Report                     *\n");
             printf("*                                                *\n");
             printf("**************************************************\n");
 
@@ -150,18 +147,7 @@ int main()
             {
                 search_Food();
             }
-            else if (choice == 7)
-            {
-                view_customer_list();
-            }
-            else if (choice == 8)
-            {
-                view_all_orders();
-            }
-            else if (choice == 9)
-            {
-                view_sales_report();
-            }
+            
         }
         else
         {
