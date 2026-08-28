@@ -118,6 +118,7 @@ int main()
             printf("*     [5]  Update Quantity                       *\n");
             printf("*     [6]  Search Food                           *\n");
             printf("*     [7]  Total Revenue                         *\n");
+            printf("*                                                *\n");
             printf("**************************************************\n");
 
             printf("Enter your choice: ");
