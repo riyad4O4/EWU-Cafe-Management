@@ -267,6 +267,7 @@ int addToCart()
 
     while (1)
     {
+        system("cls");
         printf("\n====================================\n");
         printf("             ADD FOOD\n");
         printf("====================================\n");
@@ -511,34 +512,42 @@ int customerMenu()
         switch (choice)
         {
         case 1:
+            system("cls");
             viewMenu();
             break;
 
         case 2:
+            system("cls");
             searchFood();
             break;
 
         case 3:
+            system("cls");
             selectFood();
             break;
 
         case 4:
+            system("cls");
             addToCart();
             break;
 
         case 5:
+            system("cls");
             viewCart();
             break;
 
         case 6:
+            system("cls");
             removeItem();
             break;
 
         case 7:
+            system("cls");
             generateBill();
             return 1;
 
         case 8:
+            system("cls");
             printf("\nThank you for visiting the cafe.\n");
             return 1;
 
