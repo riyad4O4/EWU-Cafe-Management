@@ -545,6 +545,10 @@ int flog_in()  // Function for faculty user login
     if (found == 1)
     {
         printf("\nFaculty Login Successful!\n");
+        printf("Press Enter to continue...");
+        getchar();
+
+        system("cls");
     }
     else
     {

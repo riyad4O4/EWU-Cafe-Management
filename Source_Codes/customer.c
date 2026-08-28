@@ -471,6 +471,7 @@ int generateBill()
     printf("------------------------------------------------------------\n");
 
     printf("Total Amount : %.2f Tk\n", total);
+    
 
     printf("============================================================\n");
     printf("              THANK YOU FOR VISITING!\n");
