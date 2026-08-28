@@ -9,12 +9,12 @@ int main()
 {
 
     int choice;
-    printf("Main Menu:\n");
-    printf("1. Faculty\n");
-    printf("2. Student\n");
-    printf("3. Admin\n");
-    printf("4. Exit\n");
-    printf("Enter your choice: ");
+    printf("\t\t\t\tMain Menu:\n");
+    printf("\t\t\t\t1. Faculty\n");
+    printf("\t\t\t\t2. Student\n");
+    printf("\t\t\t\t3. Admin\n");
+    printf("\t\t\t\t4. Exit\n");
+    printf("\t\t\t\tEnter your choice: ");
     scanf("%d", &choice);
 
     // Faculty
