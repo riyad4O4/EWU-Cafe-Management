@@ -183,7 +183,7 @@ x:
         printf("\n");
         printf("**************************************************\n");
         printf("*                                                *\n");
-        printf("*            Program Exited                      *\n");
+        printf("*                Program Exited                  *\n");
         printf("*                                                *\n");
         printf("**************************************************\n");
 
