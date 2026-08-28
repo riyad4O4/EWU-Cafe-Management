@@ -21,7 +21,7 @@ int main()
     printf("*     [4]  Exit                                  *\n");
     printf("*                                                *\n");
     printf("**************************************************\n");
-    
+
 
     printf(" Choice: ");
     scanf("%d", &choice);
@@ -85,19 +85,15 @@ int main()
         printf("\n");
         printf("**************************************************\n");
         printf("*                                                *\n");
-        printf("*     [1]  Register                              *\n");
-        printf("*     [2]  Log in                                *\n");
+        printf("*     [1]  Log in                                *\n");
         printf("*                                                *\n");
         printf("**************************************************\n");
 
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
-        if (choice == 1)
-        {
-            create_account();
-        }
-        else if (choice == 2)
+    
+       if (choice == 1)
         {
             admin_login();
 
