@@ -48,8 +48,16 @@ int main()
         }
         else if (choice == 2)
         {
-            log_in();
-            customerMenu();
+            int a;
+            a=log_in();
+            if (a==1)
+            {
+                customerMenu();
+            }
+            else
+            {
+                main();
+            }
         }
     }
 
@@ -74,8 +82,16 @@ int main()
         }
         else if (choice == 2)
         {
-            log_in();
-            customerMenu();
+            int a;
+            a=log_in();
+            if (a==1)
+            {
+                customerMenu();
+            }
+            else
+            {
+                main();
+            }
         }
     }
 
