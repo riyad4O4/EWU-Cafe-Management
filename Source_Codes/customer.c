@@ -539,8 +539,8 @@ int customerMenu()
                 break;
 
         case 7:
-            generateBill();
-            return 1;
+            showBillInNewWindow();
+            break;
 
             case 8:
                 printf("\nThank you for visiting the cafe.\n");
