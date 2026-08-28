@@ -30,7 +30,7 @@ typedef struct {
     int quantity;
     float totalPrice;
 } Order;
-static Customer customers[MAX_CUSTOMERS];
+static Customer customers[MAX_CUSTOMER];
 static int customerCount = 0;
 
 static Order orders[MAX_ORDERS];
@@ -162,7 +162,7 @@ int loadCustomersFromFile() {
         return 0;
     }
     customerCount = 0;
-    while (customerCount < MAX_CUSTOMERS &&
+    while (customerCount < MAX_CUSTOMER &&
            fscanf(fp, "%d,%49[^,],%19[^\n]\n", &customers[customerCount].id, customers[customerCount].name, customers[customerCount].phone) == 3) {
         customerCount++;
     }
@@ -447,7 +447,7 @@ int view_customer_list()
     printf("==================================================\n");
     return 0;
 
-
+    }
 
 
 int view_sales_report()
