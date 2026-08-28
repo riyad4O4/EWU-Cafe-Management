@@ -13,7 +13,7 @@ static int cartCount = 0;
 
 int loadFood()
 {
-    FILE *file;  // load food from file using file pointer
+    FILE *file; // load food from file using file pointer
 
     file = fopen("Database/food.txt", "r");
 
@@ -61,7 +61,7 @@ int saveFood()
 
     for (i = 0; i < foodCount; i++)
     {
-        fprintf(file, "%d %s %.2f %d\n",
+        fprintf(file, "%d,%s,%.2f,%d\n",
                 food[i].id,
                 food[i].name,
                 food[i].price,
@@ -478,7 +478,7 @@ int generateBill()
 
 int customerMenu()
 {
-        int choice;
+    int choice;
 
     loadFood();
 

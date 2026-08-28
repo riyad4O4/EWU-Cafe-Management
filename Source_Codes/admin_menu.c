@@ -4,11 +4,11 @@
 #include "admin_menu.h"
 
 #define MAX_FOOD 100
-#define FILE_NAME "food_data.txt"
+#define FILE_NAME "Database/food.txt"
 #define MAX_CUSTOMER 100
 #define MAX_ORDERS 100
-#define CUSTOMER_FILE "customer_data.txt"
-#define ORDER_FILE "order_data.txt"
+#define CUSTOMER_FILE "Database/customer_data.txt"
+#define ORDER_FILE "Database/order_data.txt"
 
 typedef struct
 {
@@ -31,14 +31,14 @@ typedef struct {
     float totalPrice;
 } Order;
 
-static Customer customers[MAX_CUSTOMER];
-static int customerCount = 0;
+Customer customers[MAX_CUSTOMER];
+int customerCount = 0;
 
-static Order orders[MAX_ORDERS];
-static int orderCount = 0;
+Order orders[MAX_ORDERS];
+int orderCount = 0;
 
-static Food foods[MAX_FOOD];
-static int foodCount = 0;
+Food foods[MAX_FOOD];
+int foodCount = 0;
 
 /* Helper Declarations */
 int preloadDefaultFoods(void);
@@ -58,7 +58,7 @@ int findFoodIndex(int id)
 /* Save food data to text file */
 int saveToFile()
 {
-    FILE *fp = fopen(FILE_NAME, "w");
+    FILE *fp = fopen(FILE_NAME, "a");
 
     if (fp == NULL)
     {
@@ -436,3 +436,4 @@ int view_sales_report()
     printf("Total Revenue Generated: BDT %.2f\n", totalRevenue);
     printf("==================================\n");
     return 0;
+}
