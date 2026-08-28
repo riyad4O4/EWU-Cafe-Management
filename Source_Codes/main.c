@@ -25,6 +25,8 @@ int main()
         printf("2.Log in\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
+        getchar();
+        
         if (choice == 1)
         {
             create_account();
