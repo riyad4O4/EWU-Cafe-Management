@@ -5,6 +5,7 @@
 
 int cash_payment(float total_bill) // takes total bill
 {
+    
     float cash;
     printf("\nCASH : ");
     scanf("%f", &cash); // takes customers cash amount

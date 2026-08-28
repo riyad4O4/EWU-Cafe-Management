@@ -1,8 +1,8 @@
+//2026-2-60-547
+//Doing Work on sales tracking
 #include <stdio.h>
 #include "sales.h"
 
-//2026-2-60-547
-//Doing Work on sales tracking
 
 /* Appends one sale entry (amount) to sales.txt.
    Call this after a successful payment (cash or card). */
