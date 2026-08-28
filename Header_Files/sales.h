@@ -9,9 +9,6 @@
 int record_sale(float amount);
 
 
-int daily_sales(void);
-
-
-int monthly_sales(void);
+int total_revenue();
 
 #endif
