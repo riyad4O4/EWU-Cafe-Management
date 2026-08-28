@@ -69,7 +69,7 @@ int create_account()
     printf("                 CREATE ACCOUNT\n");
     printf("==================================================\n");
 
-    printf("Enter Student ID/Faculty ID: ");
+    printf("Enter Student ID: ");
 
     fgets(user->id, 20, stdin);
     user->id[strcspn(user->id, "\n")] = '\0';
@@ -417,7 +417,7 @@ int log_in()  // Function for user login
     printf("                     LOGIN\n");
     printf("==================================================\n");
 
-    printf("Student/Faculty ID: ");
+    printf("Student ID: ");
     fgets(id, 20, stdin);
     id[strcspn(id, "\n")] = '\0';
 

@@ -111,10 +111,15 @@ int main()
             printf("\n");
             printf("**************************************************\n");
             printf("*                                                *\n");
-            printf("*     [1]  Edit Food                             *\n");
-            printf("*     [2]  View Customer List                    *\n");
-            printf("*     [3]  View All Orders                       *\n");
-            printf("*     [4]  View Sales Report                     *\n");
+            printf("*     [1]  Add Food                              *\n");
+            printf("*     [2]  Edit Food                             *\n");
+            printf("*     [3]  Delete Food                           *\n");
+            printf("*     [4]  View Food List                        *\n");
+            printf("*     [5]  Update Quantity                       *\n");
+            printf("*     [6]  Search Food                           *\n");
+            printf("*     [7]  View Customer List                    *\n");
+            printf("*     [8]  View All Orders                       *\n");
+            printf("*     [9]  View Sales Report                     *\n");
             printf("*                                                *\n");
             printf("**************************************************\n");
 
@@ -123,17 +128,37 @@ int main()
 
             if (choice == 1)
             {
-                edit_Food();
+                add_Food();
             }
             else if (choice == 2)
             {
-                view_customer_list();
+                edit_Food();
             }
             else if (choice == 3)
             {
-                view_all_orders();
+                delete_Food();
             }
             else if (choice == 4)
+            {
+                view_FoodList();
+            }
+            else if (choice == 5)
+            {
+                update_Quantity();
+            }
+            else if (choice == 6)
+            {
+                search_Food();
+            }
+            else if (choice == 7)
+            {
+                view_customer_list();
+            }
+            else if (choice == 8)
+            {
+                view_all_orders();
+            }
+            else if (choice == 9)
             {
                 view_sales_report();
             }
@@ -149,7 +174,7 @@ int main()
         printf("\n");
         printf("**************************************************\n");
         printf("*                                                *\n");
-        printf("*            Exiting the program.               *\n");
+        printf("*            Program Exited                      *\n");
         printf("*                                                *\n");
         printf("**************************************************\n");
 
