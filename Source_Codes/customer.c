@@ -429,7 +429,7 @@ int removeItem()
 
 int generateBill()
 {
-    int i;
+   int i;
     float total = 0;
 
     if (cartCount == 0)
@@ -470,8 +470,12 @@ int generateBill()
     printf("============================================================\n");
     printf("              THANK YOU FOR VISITING!\n");
     printf("============================================================\n");
-    cartCount = 0;
+
     return 1;
+=======
+    cartCount = 0;
+    return 1; 
+>>>>>>> Stashed changes
 }
 
 /* CUSTOMER MENU */
@@ -530,17 +534,17 @@ int customerMenu()
             viewCart();
             break;
 
-        case 6:
-            removeItem();
-            break;
+            case 6:
+                removeItem();
+                break;
 
         case 7:
-            generateBill();
-            return 1;
+            showBillInNewWindow();
+            break;
 
-        case 8:
-            printf("\nThank you for visiting the cafe.\n");
-            return 1;
+            case 8:
+                printf("\nThank you for visiting the cafe.\n");
+                return 1;
 
         default:
             printf("\nInvalid choice.\n");

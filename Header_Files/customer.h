@@ -32,7 +32,7 @@ int addToCart();
 int viewCart();
 int removeItem();
 int generateBill();
-
+int showBillInNewWindow();
 int customerMenu();
 
 #endif
