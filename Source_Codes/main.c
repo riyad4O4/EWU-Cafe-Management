@@ -9,7 +9,9 @@ int main()
 {
 
     int choice;
-    printf("\t\t\t\tMain Menu:\n");
+    printf("\n==================================================\n");
+    printf("                 MAIN MENU\n");
+    printf("==================================================\n");
     printf("1. Faculty\n");
     printf("2. Student\n");
     printf("3. Admin\n");
