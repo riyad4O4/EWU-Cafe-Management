@@ -117,7 +117,7 @@ int main()
             printf("*     [4]  View Food List                        *\n");
             printf("*     [5]  Update Quantity                       *\n");
             printf("*     [6]  Search Food                           *\n");
-            printf("*                                                *\n");
+            printf("*     [7]  Total Revenue                         *\n");
             printf("**************************************************\n");
 
             printf("Enter your choice: ");
@@ -146,6 +146,10 @@ int main()
             else if (choice == 6)
             {
                 search_Food();
+            }
+            else if (choice == 7)
+            {
+                total_revenue();
             }
             
         }

@@ -3,7 +3,7 @@
 #define SALES_H
 
 
-#define SALES_FILE "sales.txt"
+#define SALES_FILE "Database/sales.txt"
 
 
 int record_sale(float amount);
