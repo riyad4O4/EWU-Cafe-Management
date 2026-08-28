@@ -9,6 +9,6 @@
 int record_sale(float amount);
 
 
-int total_revenue();
+int total_revenue(void);
 
 #endif
