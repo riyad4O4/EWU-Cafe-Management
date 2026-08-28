@@ -4,7 +4,9 @@
 #include "Account.h"
 #include "admin_menu.h"
 #include "customer.h"
-#include "main_menu.h"
+#include "sales.h"
+#include "payment.h"
+#include <stdlib.h>
 
 int main()
 {
@@ -101,13 +103,15 @@ int main()
     else if (choice == 3)
     {
         printf("\n");
-
+        
         int a;
-
+        
         a = admin_login();
         if (a == 1)
         {
-
+            
+x:
+;
             printf("\n");
             printf("**************************************************\n");
             printf("*                                                *\n");
@@ -118,7 +122,7 @@ int main()
             printf("*     [5]  Update Quantity                       *\n");
             printf("*     [6]  Search Food                           *\n");
             printf("*     [7]  Total Revenue                         *\n");
-            printf("*                                                *\n");
+            printf("*     [8]  Exit                                  *\n");
             printf("**************************************************\n");
 
             printf("Enter your choice: ");
@@ -152,6 +156,11 @@ int main()
             {
                 total_revenue();
             }
+            else if (choice == 8)
+            {
+                system("cls");
+                main();
+            }
             
         }
         else
@@ -182,5 +191,5 @@ int main()
         printf("**************************************************\n");
     }
 
-    return main();
+    goto x;
 }

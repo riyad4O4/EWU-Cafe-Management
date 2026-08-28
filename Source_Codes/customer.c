@@ -2,6 +2,9 @@
 #include <string.h>
 #include <stdlib.h>
 #include "customer.h" // STUDENT ID: 2026-2-60-024
+#include "sales.h" 
+#include "payment.h" 
+
 
 static struct Food food[MAX_FOOD];
 static struct Cart cart[MAX_CART];
@@ -472,9 +475,9 @@ int generateBill()
     printf("------------------------------------------------------------\n");
 
     printf("Total Amount : %.2f Tk\n", total);
-
-    printf("              1. Cash Payment                               \n");
-    printf("              2. Card Payment                               \n");
+    printf("\n\n");
+    printf("1. Cash Payment                               \n");
+    printf("2. Card Payment                               \n");
     int choicee;
     scanf("%d",&choicee );
     getchar();
@@ -497,7 +500,11 @@ int generateBill()
     printf("============================================================\n");
 
     cartCount = 0;
+    printf("Press Enter to continue...");
+        getchar();
+        getchar();
 
+        system("cls");
     return 1;
 }
 

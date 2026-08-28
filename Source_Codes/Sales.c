@@ -2,7 +2,7 @@
 //Doing Work on sales tracking
 #include <stdio.h>
 #include "sales.h"
-
+#include "stdlib.h"
 
 /* Appends one sale entry (amount) to sales.txt.
    Call this after a successful payment (cash or card). */
@@ -47,6 +47,11 @@ int total_revenue()
     printf("Total Orders  : %d\n", count);
     printf("Total Revenue : %.2f\n", total);
     printf("--------------------------\n");
+    printf("Press Enter to continue...");
+        getchar();
+        getchar();
+
+        system("cls");
 
     return 0;
 }
