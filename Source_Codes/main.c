@@ -31,7 +31,7 @@ int main()
         }
         else if (choice == 2)
         {
-            //log_in();
+            log_in();
             customerMenu();
         }
     }
@@ -50,8 +50,8 @@ int main()
         }
         else if (choice == 2)
         {
-            //log_in();
-            int customerMenu();
+            log_in();
+            customerMenu();
         }
     }
 
@@ -69,7 +69,7 @@ int main()
         }
         else if (choice == 2)
         {
-            log_in();
+            admin_login();
             printf("1. Edit Food\n");
             printf("2. view customer list\n");
             printf("3. View all orders\n");
@@ -78,8 +78,7 @@ int main()
             scanf("%d", &choice);
             if (choice == 1)
             {
-                edit_food();
-                printf("Food edited successfully.\n");
+                edit_Food();
             }
             else if (choice == 2)
             {
