@@ -13,6 +13,7 @@ int main()
     printf("\n");
     printf("**************************************************\n");
     printf("*                  MAIN MENU                     *\n");
+    printf("**************************************************\n");
     printf("*                                                *\n");
     printf("*     [1]  Faculty                               *\n");
     printf("*     [2]  Student                               *\n");
@@ -20,6 +21,7 @@ int main()
     printf("*     [4]  Exit                                  *\n");
     printf("*                                                *\n");
     printf("**************************************************\n");
+    
 
     printf(" Choice: ");
     scanf("%d", &choice);
