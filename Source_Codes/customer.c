@@ -3,17 +3,17 @@
 #include <string.h>
 #include "customer.h" // STUDENT ID: 2026-2-60-024
 
-struct Food food[MAX_FOOD];
-struct Cart cart[MAX_CART];
+static struct Food food[MAX_FOOD];
+static struct Cart cart[MAX_CART];
 
-int foodCount = 0;
-int cartCount = 0;
+static int foodCount = 0;
+static int cartCount = 0;
 
 /* LOAD FOOD FROM FILE */
 
 int loadFood()
 {
-    FILE *file;
+    FILE *file;  // load food from file using file pointer
 
     file = fopen("Database/food.txt", "r");
 
@@ -39,7 +39,7 @@ int loadFood()
         }
     }
 
-    fclose(file);
+    fclose(file); // fclose closes the file after reading
 
     return 1;
 }
@@ -61,7 +61,7 @@ int saveFood()
 
     for (i = 0; i < foodCount; i++)
     {
-        fprintf(file, "%d,%s,%.2f,%d\n",
+        fprintf(file, "%d %s %.2f %d\n",
                 food[i].id,
                 food[i].name,
                 food[i].price,
@@ -478,7 +478,7 @@ int generateBill()
 
 int customerMenu()
 {
-    int choice;
+        int choice;
 
     loadFood();
 

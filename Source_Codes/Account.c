@@ -411,6 +411,8 @@ int log_in()  // Function for user login
         return 0;
     }
 
+    system("cls");
+
     printf("\n==================================================\n");
     printf("                     LOGIN\n");
     printf("==================================================\n");
@@ -447,6 +449,11 @@ int log_in()  // Function for user login
     if (found == 1)
     {
         printf("\nLogin Successful!\n");
+        printf("Press Enter to continue...");
+        getchar();
+
+        system("cls");
+        return 1;
     }
     else
     {
@@ -985,6 +992,10 @@ int admin_login()  //Funtion for admin login
     if(strcmp(password, "1234") == 0)  //Checks if the given password is correct
     {
         printf("\n Admin Login Successful! \n");
+        printf("Press Enter to continue...");
+        getchar();
+
+        system("cls");
         free(password);
         return 1;
     }
