@@ -1,11 +1,15 @@
 #include <stdio.h>
-#include "admin_menu.h"
-
-
+#include <stdlib.h>
 #include <string.h>
+#include "admin_menu.h"
 
 #define MAX_FOOD 100
 #define FILE_NAME "food_data.txt"
+#define MAX_CUSTOMER 100
+#define MAX_ORDERS 100
+#define CUSTOMER_FILE "customer_data.txt"
+#define ORDER_FILE "order_data.txt"
+
 typedef struct
 {
     int id;
@@ -14,8 +18,31 @@ typedef struct
     int quantity;
 } Food;
 
+typedef struct {
+    char id[50]; /* Updated to support formatted string IDs (e.g., 2026-2-60-091) */
+    char phone[30];
+} Customer;
+
+typedef struct {
+    int orderId;
+    char customerId[50]; /* Updated to match customer string ID */
+    char foodName[50];
+    int quantity;
+    float totalPrice;
+} Order;
+
+static Customer customers[MAX_CUSTOMER];
+static int customerCount = 0;
+
+static Order orders[MAX_ORDERS];
+static int orderCount = 0;
+
 static Food foods[MAX_FOOD];
 static int foodCount = 0;
+
+/* Helper Declarations */
+int preloadDefaultFoods(void);
+
 int findFoodIndex(int id)
 {
     for (int i = 0; i < foodCount; i++)
@@ -25,10 +52,10 @@ int findFoodIndex(int id)
             return i;
         }
     }
-
     return -1;
 }
-/* Save data to text file */
+
+/* Save food data to text file */
 int saveToFile()
 {
     FILE *fp = fopen(FILE_NAME, "w");
@@ -49,40 +76,10 @@ int saveToFile()
     }
 
     fclose(fp);
-    return 0;
+    return 1;
 }
-/* Load data from text file */
-int loadFromFile()
-{
-    FILE *fp = fopen(FILE_NAME, "r");
 
-    /*
-       If the file does not exist,
-       create the 11 default foods.
-    */
-    if (fp == NULL)
-    {
-        preloadDefaultFoods();
-        saveToFile();
-        return 0;
-    }
-
-    foodCount = 0;
-
-    while (foodCount < MAX_FOOD &&
-            fscanf(fp, "%d,%49[^,],%f,%d",
-                   &foods[foodCount].id,
-                   foods[foodCount].name,
-                   &foods[foodCount].price,
-                   &foods[foodCount].quantity) == 4)
-    {
-        foodCount++;
-    }
-
-    fclose(fp);
-    return 0;
-}
-/* Create the original 11 foods */
+/* Create the original default foods */
 int preloadDefaultFoods()
 {
     Food defaultItems[] =
@@ -108,8 +105,88 @@ int preloadDefaultFoods()
     }
     return 0;
 }
+
+/* Load food data from text file */
+int loadFromFile()
+{
+    FILE *fp = fopen(FILE_NAME, "r");
+
+    if (fp == NULL)
+    {
+        preloadDefaultFoods();
+        saveToFile();
+        return 0;
+    }
+
+    foodCount = 0;
+
+    while (foodCount < MAX_FOOD &&
+            fscanf(fp, "%d,%49[^,],%f,%d\n",
+                   &foods[foodCount].id,
+                   foods[foodCount].name,
+                   &foods[foodCount].price,
+                   &foods[foodCount].quantity) == 4)
+    {
+        foodCount++;
+    }
+
+    fclose(fp);
+    return 1;
+}
+
+/* ================= CUSTOMER & ORDER HELPERS ================= */
+
+/* Reads live Customer data logged in by your teammate's code */
+int loadCustomersFromFile() {
+    FILE *fp = fopen(CUSTOMER_FILE, "r");
+    if (fp == NULL) {
+        customerCount = 0;
+        return 0;
+    }
+    customerCount = 0;
+    char line[100];
+
+    while (customerCount < MAX_CUSTOMER && fgets(line, sizeof(line), fp)) {
+        line[strcspn(line, "\r\n")] = 0;
+        if (sscanf(line, "%49[^,],%29s", customers[customerCount].id, customers[customerCount].phone) == 2) {
+            customerCount++;
+        }
+    }
+    fclose(fp);
+    return 1;
+}
+
+/* Reads live Order data generated when customers place orders */
+int loadOrdersFromFile() {
+    FILE *fp = fopen(ORDER_FILE, "r");
+    if (fp == NULL) {
+        orderCount = 0;
+        return 0;
+    }
+    orderCount = 0;
+    char line[150];
+
+    while (orderCount < MAX_ORDERS && fgets(line, sizeof(line), fp)) {
+        line[strcspn(line, "\r\n")] = 0;
+        if (sscanf(line, "%d,%49[^,],%49[^,],%d,%f",
+                   &orders[orderCount].orderId,
+                   orders[orderCount].customerId,
+                   orders[orderCount].foodName,
+                   &orders[orderCount].quantity,
+                   &orders[orderCount].totalPrice) == 5) {
+            orderCount++;
+        }
+    }
+    fclose(fp);
+    return 1;
+}
+
+/* ================= ADMIN FUNCTIONS ================= */
+
 int add_Food()
 {
+    system("cls");
+
     if (foodCount >= MAX_FOOD)
     {
         printf("\n[Error] Food list is full!\n");
@@ -118,40 +195,34 @@ int add_Food()
 
     printf("\n========== ADD FOOD ==========\n");
 
-    /* Ask for new Food ID */
     printf("Enter Food ID: ");
     scanf("%d", &foods[foodCount].id);
 
-    /* Check if ID already exists */
     if (findFoodIndex(foods[foodCount].id) != -1)
     {
         printf("\n[Error] This Food ID already exists!\n");
         return 0;
     }
 
-    /* Ask for new Food Name */
     printf("Enter Food Name: ");
     scanf(" %[^\n]", foods[foodCount].name);
 
-    /* Ask for new Food Price */
     printf("Enter Food Price: ");
     scanf("%f", &foods[foodCount].price);
 
-    /* Ask for new Food Quantity */
     printf("Enter Food Quantity: ");
     scanf("%d", &foods[foodCount].quantity);
 
-    /* Increase number of foods */
     foodCount++;
-
-    /* Save new food permanently */
     saveToFile();
 
     printf("\nFood added successfully!\n");
     return 0;
 }
+
 int edit_Food()
 {
+    system("cls");
     int id;
 
     printf("\n========== EDIT FOOD ==========\n");
@@ -180,8 +251,10 @@ int edit_Food()
     printf("\nFood updated successfully!\n");
     return 0;
 }
+
 int delete_Food()
 {
+    system("cls");
     int id;
 
     printf("\n========== DELETE FOOD ==========\n");
@@ -203,14 +276,15 @@ int delete_Food()
     }
 
     foodCount--;
-
     saveToFile();
 
     printf("\nFood item deleted successfully!\n");
     return 0;
 }
+
 int view_FoodList()
 {
+    system("cls");
     printf("\n========== FOOD MENU ==========\n");
 
     if (foodCount == 0)
@@ -235,6 +309,7 @@ int view_FoodList()
 
 int update_Quantity()
 {
+    system("cls");
     int id;
 
     printf("\n========== UPDATE QUANTITY ==========\n");
@@ -262,11 +337,9 @@ int update_Quantity()
     return 0;
 }
 
-
-/* 6. SEARCH FOOD */
-
 int search_Food()
 {
+    system("cls");
     int id;
 
     printf("\n========== SEARCH FOOD ==========\n");
@@ -283,31 +356,83 @@ int search_Food()
     else
     {
         printf("\n========== ITEM FOUND ==========\n");
-
         printf("ID: %d\n", foods[index].id);
         printf("Name: %s\n", foods[index].name);
         printf("Price: %.2f\n", foods[index].price);
         printf("Available: %d\n", foods[index].quantity);
-
         printf("================================\n");
     }
     return 0;
 }
 
+/* Option 7: Displays Customer ID and Phone Number */
 int view_customer_list()
 {
-    printf("\n[TODO] Customer list feature not implemented yet.\n");
+    system("cls");
+    loadCustomersFromFile();
+
+    printf("\n========== CUSTOMER LIST ==========\n");
+
+    if (customerCount == 0) {
+        printf("No customers found in record.\n");
+    } else {
+        printf("%-22s %-15s\n", "Customer/Student ID", "Phone Number");
+        printf("-------------------------------------------\n");
+        for (int i = 0; i < customerCount; i++) {
+            printf("%-22s %-15s\n",
+                   customers[i].id,
+                   customers[i].phone);
+        }
+    }
+
+    printf("===========================================\n");
     return 0;
 }
 
-int view_all_orders()
-{
-    printf("\n[TODO] Orders feature not implemented yet.\n");
+/* Option 8: Displays all placed orders */
+int view_all_orders() {
+    system("cls");
+    loadOrdersFromFile();
+
+    printf("\n=================== ALL ORDERS ===================\n");
+    if (orderCount == 0) {
+        printf("No order history found.\n");
+    } else {
+        printf("%-10s %-20s %-18s %-6s %-10s\n", "Order ID", "Customer ID", "Item", "Qty", "Total Price");
+        printf("--------------------------------------------------\n");
+        for (int i = 0; i < orderCount; i++) {
+            printf("%-10d %-20s %-18s %-6d %.2f\n",
+                   orders[i].orderId,
+                   orders[i].customerId,
+                   orders[i].foodName,
+                   orders[i].quantity,
+                   orders[i].totalPrice);
+        }
+    }
+    printf("==================================================\n");
     return 0;
 }
 
+/* Option 9: Calculates and displays total sales */
 int view_sales_report()
 {
-    printf("\n[TODO] Sales report feature not implemented yet.\n");
+    system("cls");
+    loadOrdersFromFile();
+
+    printf("\n========== SALES REPORT ==========\n");
+    if (orderCount == 0) {
+        printf("No sales data available.\n");
+        printf("==================================\n");
+        return 0;
+    }
+    int totalItemsSold = 0;
+    float totalRevenue = 0.0f;
+    for (int i = 0; i < orderCount; i++) {
+        totalItemsSold += orders[i].quantity;
+        totalRevenue += orders[i].totalPrice;
+    }
+    printf("Total Orders Processed : %d\n", orderCount);
+    printf("Total Food Items Sold  : %d\n", totalItemsSold);
+    printf("Total Revenue Generated: BDT %.2f\n", totalRevenue);
+    printf("==================================\n");
     return 0;
-}
