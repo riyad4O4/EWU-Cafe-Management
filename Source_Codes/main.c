@@ -9,16 +9,19 @@ int main()
 {
 
     int choice;
-    printf("\n==================================================\n");
-    printf("                 MAIN MENU\n");
-    printf("==================================================\n");
-    printf("1. Faculty\n");
-    printf("2. Student\n");
-    printf("3. Admin\n");
-    printf("4. Exit\n");
-    printf("Enter your choice: ");
+    printf("\n");
+    printf("**\n");
+    printf("*                  MAIN MENU                     \n");
+    printf("**\n");
+    printf("                                                \n");
+    printf("     [1]  Faculty                               \n");
+    printf("     [2]  Student                               \n");
+    printf("     [3]  Admin                                 \n");
+    printf("     [4]  Exit                                  \n");
+    printf("                                                *\n");
+    printf("**\n");
+    printf(" Choice: ");
     scanf("%d", &choice);
-
     // Faculty
 
     if (choice == 1)
