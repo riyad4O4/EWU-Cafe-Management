@@ -478,7 +478,7 @@ int generateBill()
     printf("\n\n");
     printf("1. Cash Payment                               \n");
     printf("2. Card Payment                               \n");
-    printf("\nChoose Payment Method :                       ");
+    printf("\nChoose Payment Method : ");
     int choicee;
     scanf("%d",&choicee );
     getchar();
