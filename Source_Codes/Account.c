@@ -422,3 +422,5 @@ int admin_login()  //Funtion for admin login
         return 0;
     
 }
+
+//Paste
