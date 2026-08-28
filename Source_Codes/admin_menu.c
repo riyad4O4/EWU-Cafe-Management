@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "admin_menu.h"
+#include<stdlib.h>
 
 
 #include <string.h>
