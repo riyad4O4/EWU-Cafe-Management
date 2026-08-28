@@ -1,8 +1,8 @@
 
-#ifndef CUSTOMER_H
+#ifndef CUSTOMER_H                 // STUDENT ID: 2026-2-60-024
 #define CUSTOMER_H
 
-#define MAX_FOOD 50
+#define MAX_FOOD 100
 #define MAX_CART 50
 
 struct Food
