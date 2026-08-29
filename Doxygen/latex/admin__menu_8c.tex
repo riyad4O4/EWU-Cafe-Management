@@ -1,0 +1,147 @@
+\doxysection{Source\+\_\+\+Codes/\+admin\+\_\+menu.c File Reference}
+\hypertarget{admin__menu_8c}{}\label{admin__menu_8c}\index{Source\_Codes/admin\_menu.c@{Source\_Codes/admin\_menu.c}}
+{\ttfamily \+\#include $<$stdio.\+h$>$}\newline
+{\ttfamily \+\#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \+\#include $<$string.\+h$>$}\newline
+{\ttfamily \+\#include "{}admin\+\_\+menu.\+h"{}}\newline
+\doxysubsubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct_food}{Food}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{admin__menu_8c_ab49b5e6883b47728ed9b4828b2ec8853}{MAX\+\_\+\+FOOD}}~100
+\item 
+\+\#define \doxymbox{\hyperlink{admin__menu_8c_ab117546549783a058d0321a287699579}{FILE\+\_\+\+NAME}}~"{}Database/\+food.\+txt"{}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \doxymbox{\hyperlink{admin__menu_8c_a23cda964a6265e954149c91c87dfa1c7}{preload\+Default\+Foods}} (void)
+\item 
+int \doxymbox{\hyperlink{admin__menu_8c_abc047213c80bb96efadf837cfa452ee0}{find\+Food\+Index}} (int id)
+\item 
+int \doxymbox{\hyperlink{admin__menu_8c_a30cec0dd38e2463a42aa93b229450e1b}{save\+To\+File}} (void)
+\item 
+int \doxymbox{\hyperlink{admin__menu_8c_a7f3fc2937b53e30018be987e6c1c12fb}{load\+From\+File}} (void)
+\item 
+int \doxymbox{\hyperlink{admin__menu_8c_a926f9e793d78477447576e75db8f4550}{add\+\_\+\+Food}} ()
+\item 
+int \doxymbox{\hyperlink{admin__menu_8c_a317ba9ea85cfa53c01f7722c69a4a850}{edit\+\_\+\+Food}} ()
+\item 
+int \doxymbox{\hyperlink{admin__menu_8c_a48a502fc469ebcf4a76c6f7eb4450304}{delete\+\_\+\+Food}} ()
+\item 
+int \doxymbox{\hyperlink{admin__menu_8c_a720cb07890090b38f52ca872058bb991}{view\+\_\+\+Food\+List}} ()
+\item 
+int \doxymbox{\hyperlink{admin__menu_8c_a4331cf6f4e7450bd2d1b9e68663f9532}{update\+\_\+\+Quantity}} ()
+\item 
+int \doxymbox{\hyperlink{admin__menu_8c_ae2386b272094eb2ed4be118241f7949e}{search\+\_\+\+Food}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{struct_food}{Food}} \doxymbox{\hyperlink{admin__menu_8c_a00a6bcb102cc53caddee4ea1fb6029df}{foods}} \+[\doxymbox{\hyperlink{admin__menu_8c_ab49b5e6883b47728ed9b4828b2ec8853}{MAX\+\_\+\+FOOD}}]\+
+\item 
+int \doxymbox{\hyperlink{admin__menu_8c_a256cbe8dffb895209476eef2aeb8c753}{food\+Count}} = 0
+\end{DoxyCompactItemize}
+
+
+\label{admin__menu_8c_doc-define-members}
+\Hypertarget{admin__menu_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{admin__menu_8c_ab117546549783a058d0321a287699579}\index{admin\_menu.c@{admin\_menu.c}!FILE\_NAME@{FILE\_NAME}}
+\index{FILE\_NAME@{FILE\_NAME}!admin\_menu.c@{admin\_menu.c}}
+\doxysubsubsection{\texorpdfstring{FILE\_NAME}{FILE\_NAME}}
+{\footnotesize\ttfamily \label{admin__menu_8c_ab117546549783a058d0321a287699579} 
+\+\#define FILE\+\_\+\+NAME~"{}Database/\+food.\+txt"{}}
+
+\Hypertarget{admin__menu_8c_ab49b5e6883b47728ed9b4828b2ec8853}\index{admin\_menu.c@{admin\_menu.c}!MAX\_FOOD@{MAX\_FOOD}}
+\index{MAX\_FOOD@{MAX\_FOOD}!admin\_menu.c@{admin\_menu.c}}
+\doxysubsubsection{\texorpdfstring{MAX\_FOOD}{MAX\_FOOD}}
+{\footnotesize\ttfamily \label{admin__menu_8c_ab49b5e6883b47728ed9b4828b2ec8853} 
+\+\#define MAX\+\_\+\+FOOD~100}
+
+
+
+\label{admin__menu_8c_doc-func-members}
+\Hypertarget{admin__menu_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{admin__menu_8c_a926f9e793d78477447576e75db8f4550}\index{admin\_menu.c@{admin\_menu.c}!add\_Food@{add\_Food}}
+\index{add\_Food@{add\_Food}!admin\_menu.c@{admin\_menu.c}}
+\doxysubsubsection{\texorpdfstring{add\_Food()}{add\_Food()}}
+{\footnotesize\ttfamily \label{admin__menu_8c_a926f9e793d78477447576e75db8f4550} 
+int add\+\_\+\+Food (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{admin__menu_8c_a48a502fc469ebcf4a76c6f7eb4450304}\index{admin\_menu.c@{admin\_menu.c}!delete\_Food@{delete\_Food}}
+\index{delete\_Food@{delete\_Food}!admin\_menu.c@{admin\_menu.c}}
+\doxysubsubsection{\texorpdfstring{delete\_Food()}{delete\_Food()}}
+{\footnotesize\ttfamily \label{admin__menu_8c_a48a502fc469ebcf4a76c6f7eb4450304} 
+int delete\+\_\+\+Food (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{admin__menu_8c_a317ba9ea85cfa53c01f7722c69a4a850}\index{admin\_menu.c@{admin\_menu.c}!edit\_Food@{edit\_Food}}
+\index{edit\_Food@{edit\_Food}!admin\_menu.c@{admin\_menu.c}}
+\doxysubsubsection{\texorpdfstring{edit\_Food()}{edit\_Food()}}
+{\footnotesize\ttfamily \label{admin__menu_8c_a317ba9ea85cfa53c01f7722c69a4a850} 
+int edit\+\_\+\+Food (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{admin__menu_8c_abc047213c80bb96efadf837cfa452ee0}\index{admin\_menu.c@{admin\_menu.c}!findFoodIndex@{findFoodIndex}}
+\index{findFoodIndex@{findFoodIndex}!admin\_menu.c@{admin\_menu.c}}
+\doxysubsubsection{\texorpdfstring{findFoodIndex()}{findFoodIndex()}}
+{\footnotesize\ttfamily \label{admin__menu_8c_abc047213c80bb96efadf837cfa452ee0} 
+int find\+Food\+Index (\begin{DoxyParamCaption}\item[{int}]{id}{}\end{DoxyParamCaption})}
+
+\Hypertarget{admin__menu_8c_a7f3fc2937b53e30018be987e6c1c12fb}\index{admin\_menu.c@{admin\_menu.c}!loadFromFile@{loadFromFile}}
+\index{loadFromFile@{loadFromFile}!admin\_menu.c@{admin\_menu.c}}
+\doxysubsubsection{\texorpdfstring{loadFromFile()}{loadFromFile()}}
+{\footnotesize\ttfamily \label{admin__menu_8c_a7f3fc2937b53e30018be987e6c1c12fb} 
+int load\+From\+File (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{admin__menu_8c_a23cda964a6265e954149c91c87dfa1c7}\index{admin\_menu.c@{admin\_menu.c}!preloadDefaultFoods@{preloadDefaultFoods}}
+\index{preloadDefaultFoods@{preloadDefaultFoods}!admin\_menu.c@{admin\_menu.c}}
+\doxysubsubsection{\texorpdfstring{preloadDefaultFoods()}{preloadDefaultFoods()}}
+{\footnotesize\ttfamily \label{admin__menu_8c_a23cda964a6265e954149c91c87dfa1c7} 
+int preload\+Default\+Foods (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{admin__menu_8c_a30cec0dd38e2463a42aa93b229450e1b}\index{admin\_menu.c@{admin\_menu.c}!saveToFile@{saveToFile}}
+\index{saveToFile@{saveToFile}!admin\_menu.c@{admin\_menu.c}}
+\doxysubsubsection{\texorpdfstring{saveToFile()}{saveToFile()}}
+{\footnotesize\ttfamily \label{admin__menu_8c_a30cec0dd38e2463a42aa93b229450e1b} 
+int save\+To\+File (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{admin__menu_8c_ae2386b272094eb2ed4be118241f7949e}\index{admin\_menu.c@{admin\_menu.c}!search\_Food@{search\_Food}}
+\index{search\_Food@{search\_Food}!admin\_menu.c@{admin\_menu.c}}
+\doxysubsubsection{\texorpdfstring{search\_Food()}{search\_Food()}}
+{\footnotesize\ttfamily \label{admin__menu_8c_ae2386b272094eb2ed4be118241f7949e} 
+int search\+\_\+\+Food (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{admin__menu_8c_a4331cf6f4e7450bd2d1b9e68663f9532}\index{admin\_menu.c@{admin\_menu.c}!update\_Quantity@{update\_Quantity}}
+\index{update\_Quantity@{update\_Quantity}!admin\_menu.c@{admin\_menu.c}}
+\doxysubsubsection{\texorpdfstring{update\_Quantity()}{update\_Quantity()}}
+{\footnotesize\ttfamily \label{admin__menu_8c_a4331cf6f4e7450bd2d1b9e68663f9532} 
+int update\+\_\+\+Quantity (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{admin__menu_8c_a720cb07890090b38f52ca872058bb991}\index{admin\_menu.c@{admin\_menu.c}!view\_FoodList@{view\_FoodList}}
+\index{view\_FoodList@{view\_FoodList}!admin\_menu.c@{admin\_menu.c}}
+\doxysubsubsection{\texorpdfstring{view\_FoodList()}{view\_FoodList()}}
+{\footnotesize\ttfamily \label{admin__menu_8c_a720cb07890090b38f52ca872058bb991} 
+int view\+\_\+\+Food\+List (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\label{admin__menu_8c_doc-var-members}
+\Hypertarget{admin__menu_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{admin__menu_8c_a256cbe8dffb895209476eef2aeb8c753}\index{admin\_menu.c@{admin\_menu.c}!foodCount@{foodCount}}
+\index{foodCount@{foodCount}!admin\_menu.c@{admin\_menu.c}}
+\doxysubsubsection{\texorpdfstring{foodCount}{foodCount}}
+{\footnotesize\ttfamily \label{admin__menu_8c_a256cbe8dffb895209476eef2aeb8c753} 
+int food\+Count = 0}
+
+\Hypertarget{admin__menu_8c_a00a6bcb102cc53caddee4ea1fb6029df}\index{admin\_menu.c@{admin\_menu.c}!foods@{foods}}
+\index{foods@{foods}!admin\_menu.c@{admin\_menu.c}}
+\doxysubsubsection{\texorpdfstring{foods}{foods}}
+{\footnotesize\ttfamily \label{admin__menu_8c_a00a6bcb102cc53caddee4ea1fb6029df} 
+\doxymbox{\hyperlink{struct_food}{Food}} foods\+[\doxymbox{\hyperlink{admin__menu_8c_ab49b5e6883b47728ed9b4828b2ec8853}{MAX\+\_\+\+FOOD}}]\+}
+
