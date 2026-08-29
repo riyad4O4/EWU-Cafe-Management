@@ -1,8 +1,8 @@
 1,Burger,150.00,13
-2,Pizza,250.00,20
+2,Pizza,250.00,18
 3,Pasta,180.00,16
 4,Sandwich,120.00,19
-5,Coffee,80.00,5
+5,Coffee,80.00,3
 6,FrenchFries,100.00,23
 7,Chicken,220.00,14
 8,Noodles,160.00,9
