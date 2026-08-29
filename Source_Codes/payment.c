@@ -26,12 +26,12 @@ int card_payment(float total_bill) // takes total bill
     while (1) // infinite loop until payments success
     {
         printf("Total Bill %.2f\n", total_bill);
-        printf("Enter amount to pay : \n");
+        printf("\nEnter amount to pay : ");
         scanf("%f", &amount);
 
         if (amount == total_bill)
         {
-            printf("Enter Pin : \n");
+            printf("Enter Pin : ");
             scanf("%f", &temp); // sudo pin input
             printf("Order Paid Successfully\n");
             record_sale(total_bill);
