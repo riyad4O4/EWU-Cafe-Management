@@ -495,9 +495,9 @@ int generateBill()
         cash_payment(total);
     }
     
-
+    printf("\n");
     printf("============================================================\n");
-    printf("              THANK YOU FOR VISITING!\n");
+    printf("                   THANK YOU FOR VISITING!\n");
     printf("============================================================\n");
 
     cartCount = 0;

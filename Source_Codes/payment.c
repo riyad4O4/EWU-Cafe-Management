@@ -15,7 +15,7 @@ int cash_payment(float total_bill) // takes total bill
         return cash_payment(total_bill); // if customer pays less than total bill it starts again
     }
     printf("Change %f\n", cash - total_bill); // calculates change
-    printf("Order Paid Successfully\n");
+    printf("\nOrder Paid Successfully\n");
     record_sale(total_bill);
     return 0;
 }
@@ -33,7 +33,7 @@ int card_payment(float total_bill) // takes total bill
         {
             printf("Enter Pin : ");
             scanf("%f", &temp); // sudo pin input
-            printf("Order Paid Successfully\n");
+            printf("\nOrder Paid Successfully\n");
             record_sale(total_bill);
             return 0;
         }
