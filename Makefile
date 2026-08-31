@@ -11,5 +11,6 @@ TARGET = cafe_management.exe
 all:
 	gcc -IHeader_Files $(SOURCES) -o $(TARGET)
 
+
 clean:
-	del /Q $(TARGET)
+	cmd /c del /F /Q cafe_management.exe
